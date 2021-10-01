@@ -13,15 +13,17 @@ author.
 
 
 # CAD
-https://www.freecadweb.org/
-https://gmsh.info/
+[FreeCAD] (https://www.freecadweb.org/)
+
+[Gmsh] (https://gmsh.info/)
 
 # Shader Programmierung
 [shadertoy](https://www.shadertoy.com/)
 [The Book of Shaders] (https://thebookofshaders.com/)
 
 # Licht
-https://www.youtube.com/watch?v=7fLFOgSVFJM
+[Lichtquanten] (https://www.youtube.com/watch?v=7fLFOgSVFJM)
+
 [Welle-Teilchen-Dualismus I](https://www.youtube.com/watch?v=7BV0Fs4eM0I)
 
 [Welle-Teilchen-Dualismus II](https://www.youtube.com/watch?v=BtgNrFU4kgg)
