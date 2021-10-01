@@ -11,7 +11,19 @@ author.
 
 **These notes are work in progress!**
 
-# Links & Videos
+
+# CAD
+[FreeCAD](https://www.freecadweb.org/)
+
+[Gmsh](https://gmsh.info/)
+
+# Shader Programmierung
+[shadertoy](https://www.shadertoy.com/)
+
+[The Book of Shaders](https://thebookofshaders.com/)
+
+# Licht
+[Lichtquanten](https://www.youtube.com/watch?v=7fLFOgSVFJM)
 
 [Welle-Teilchen-Dualismus I](https://www.youtube.com/watch?v=7BV0Fs4eM0I)
 
@@ -20,9 +32,3 @@ author.
 [Planksches Wirkungsquantum](https://youtu.be/kvrsbepx7Wo)
 
 [Leuchttürme und Pi](https://www.youtube.com/watch?v=d-o3eB9sfls)
-
-# Shader Programmierung
-[shadertoy](https://www.shadertoy.com/)
-
-# Photoeffekt
-https://www.youtube.com/watch?v=7fLFOgSVFJM
