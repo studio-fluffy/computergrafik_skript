@@ -19,7 +19,8 @@ author.
 
 # Shader Programmierung
 [shadertoy](https://www.shadertoy.com/)
-[The Book of Shaders] (https://thebookofshaders.com/)
+
+[The Book of Shaders](https://thebookofshaders.com/)
 
 # Licht
 [Lichtquanten](https://www.youtube.com/watch?v=7fLFOgSVFJM)
