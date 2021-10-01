@@ -11,6 +11,11 @@ author.
 
 **These notes are work in progress!**
 
+# Animation
+[Muybridge](https://en.wikipedia.org/wiki/Eadweard_Muybridge)
+
+[W3 School](https://www.w3schools.com/)
+
 # Datenvisualisierung
 [Paraview](https://www.paraview.org/)
 
