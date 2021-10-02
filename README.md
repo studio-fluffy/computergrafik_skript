@@ -14,6 +14,8 @@ author.
 # Mensch-Maschine Interaktion
 [W3 School](https://www.w3schools.com/)
 
+[React](https://reactjs.org/)
+
 # Animation und Echtzeitvisualisierung
 [Muybridge](https://en.wikipedia.org/wiki/Eadweard_Muybridge)
 
