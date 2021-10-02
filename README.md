@@ -21,11 +21,14 @@ author.
 
 [HTML Canvas](https://www.w3schools.com/html/html5_canvas.asp)
 
+[Sprites](https://de.wikipedia.org/wiki/Sprite_(Computergrafik))
+
 [OpenGL](https://www.khronos.org/opengl/)
 
 [WebGL](https://www.khronos.org/webgl/)
 
 [OpenCL](https://www.khronos.org/opencl/)
+
 
 
 # Datenvisualisierung
