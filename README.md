@@ -11,10 +11,20 @@ author.
 
 **These notes are work in progress!**
 
-# Animation
+# Mensch-Maschine Interaktion
+[W3 School](https://www.w3schools.com/)
+
+# Animation und Echtzeitvisualisierung
 [Muybridge](https://en.wikipedia.org/wiki/Eadweard_Muybridge)
 
-[W3 School](https://www.w3schools.com/)
+[HTML Canvas](https://www.w3schools.com/html/html5_canvas.asp)
+
+[OpenGL](https://www.khronos.org/opengl/)
+
+[WebGL](https://www.khronos.org/webgl/)
+
+[OpenCL](https://www.khronos.org/opencl/)
+
 
 # Datenvisualisierung
 [Paraview](https://www.paraview.org/)
