@@ -17,6 +17,8 @@ author.
 [React](https://reactjs.org/)
 
 # Animation und Echtzeitvisualisierung
+[Three.js](https://threejs.org/)
+
 [Muybridge](https://de.wikipedia.org/wiki/Eadweard_Muybridge)
 
 [HTML Canvas](https://www.w3schools.com/html/html5_canvas.asp)
