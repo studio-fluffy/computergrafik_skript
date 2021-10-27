@@ -44,6 +44,8 @@ author.
 
 [Gmsh](https://gmsh.info/)
 
+[Beauty of Bezier curves] (https://www.youtube.com/watch?v=aVwxzDHniEw&list=PLnQX-jgAF5pTkwtUuVpqS5tuWmJ-6ZM-Z&index=2)
+
 # Shader Programmierung
 [shadertoy](https://www.shadertoy.com/)
 
