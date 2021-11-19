@@ -51,6 +51,10 @@ author.
 
 [The Book of Shaders](https://thebookofshaders.com/)
 
+# Raytracing
+
+[Disney Raytracing](https://www.youtube.com/watch?v=frLwRLS_ZR0)
+
 # Licht
 [Lichtquanten](https://www.youtube.com/watch?v=7fLFOgSVFJM)
 
