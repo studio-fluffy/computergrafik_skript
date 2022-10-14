@@ -16,12 +16,9 @@ and open the template in the editor.
 
         <script id="2d-vertex-shader" type="x-shader/x-vertex">
             attribute vec2 a_position;
-            uniform float t;
-            varying float T;
+
             void main() {
-            //  gl_Position = vec4(a_position, 0.0, t);
-            T = t;
-    //        gl_Position = vec4(a_position[0], a_position[1], 0.0, 5.0);
+    
             gl_Position = vec4(a_position.x, a_position.y, 0.0, 1.0);
 
             }
@@ -32,7 +29,6 @@ and open the template in the editor.
             varying float T;
             void main() {
             gl_FragColor = vec4(0.0 ,1.0,0.0,1.0);
-            //gl_FragColor = vec4(0.0 ,cos(T) * 1.0,0.0,1.0);
             }
         </script>
 
