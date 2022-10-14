@@ -11,6 +11,30 @@ author.
 
 **These notes are work in progress!**
 
+# Mensch-Maschine Interaktion
+[W3 School](https://www.w3schools.com/)
+
+[React](https://reactjs.org/)
+
+# Animation und Echtzeitvisualisierung
+[Raymarching](https://reindernijhoff.net/2017/07/raymarching-distance-fields/)
+
+[Three.js](https://threejs.org/)
+
+[Muybridge](https://de.wikipedia.org/wiki/Eadweard_Muybridge)
+
+[HTML Canvas](https://www.w3schools.com/html/html5_canvas.asp)
+
+[Sprites](https://de.wikipedia.org/wiki/Sprite_(Computergrafik))
+
+[OpenGL](https://www.khronos.org/opengl/)
+
+[WebGL](https://www.khronos.org/webgl/)
+
+[OpenCL](https://www.khronos.org/opencl/)
+
+
+
 # Datenvisualisierung
 [Paraview](https://www.paraview.org/)
 
@@ -20,10 +44,16 @@ author.
 
 [Gmsh](https://gmsh.info/)
 
+[Beauty of Bezier curves](https://www.youtube.com/watch?v=aVwxzDHniEw&list=PLnQX-jgAF5pTkwtUuVpqS5tuWmJ-6ZM-Z&index=2)
+
 # Shader Programmierung
 [shadertoy](https://www.shadertoy.com/)
 
 [The Book of Shaders](https://thebookofshaders.com/)
+
+# Raytracing
+
+[Disney Raytracing](https://www.youtube.com/watch?v=frLwRLS_ZR0)
 
 # Licht
 [Lichtquanten](https://www.youtube.com/watch?v=7fLFOgSVFJM)
