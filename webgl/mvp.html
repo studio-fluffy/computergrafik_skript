@@ -37,7 +37,7 @@ and open the template in the editor.
 
             lightDir = normalize(lightDir);
 
-            vec3 rNormal = m*normal;
+            vec3 rNormal = normalize(m*normal);
 
             intensity = max(0.0, dot(rNormal, lightDir));
             }
@@ -47,7 +47,7 @@ and open the template in the editor.
             precision mediump float;
             varying float intensity;
             void main() {
-            float i = min(intensity + 0.3, 1.0);
+            float i = min(intensity + 0.1, 1.0);
             gl_FragColor = vec4(i*vec3(0.2,0.1,1.0),1.0);
             }
         </script>
