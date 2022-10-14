@@ -16,10 +16,13 @@ and open the template in the editor.
 
         <script id="2d-vertex-shader" type="x-shader/x-vertex">
             attribute vec2 a_position;
-
+            uniform float t;
+            varying float T;
             void main() {
-    
-            gl_Position = vec4(a_position.x, a_position.y, 0.0, 1.0);
+            //  gl_Position = vec4(a_position, 0.0, t);
+            T = t;
+    //        gl_Position = vec4(a_position[0], a_position[1], 0.0, 1.0);
+            gl_Position = vec4(a_position.x, a_position.y, 1.0, 1.0);
 
             }
         </script>
@@ -27,8 +30,12 @@ and open the template in the editor.
         <script id="2d-fragment-shader" type="x-shader/x-fragment">
             precision mediump float;
             varying float T;
+            
             void main() {
-            gl_FragColor = vec4(0.0 ,1.0,0.0,1.0);
+                float cy = cos(0.1*gl_FragCoord.y);
+                float cx = cos(0.1*gl_FragCoord.x);
+
+            gl_FragColor = vec4(abs(cx) ,abs(cy),0.0,1.0);
             }
         </script>
 
@@ -44,24 +51,24 @@ and open the template in the editor.
             var canvas;
             var gl;
             var buffer;
-
-            //warten bis Dokument erstellt wurde
             window.onload = init;
 
+
+            var someProgress;
 
             function init() {
             // Get A WebGL context
             canvas = document.getElementById("glcanvas");
-            canvas.width = 800;
-            canvas.height = 400;
+            canvas.width = 400;
+            canvas.height = 300;
 
 
 
             gl = canvas.getContext("webgl");
 
 
-            gl.viewport(0, 0, gl.drawingBufferWidth, 400);
-
+            gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+            
 
 
             //compile and link shaders
@@ -83,11 +90,37 @@ and open the template in the editor.
             gl.attachShader(program, vertexShader);
             gl.attachShader(program, fragmentShader);
             gl.linkProgram(program);
-            gl.useProgram(program);
+
+
+
+
 
 
             // Create an empty buffer
             buffer = gl.createBuffer();
+
+            someProgress = 1.0;
+
+            //start gameloop
+            render();
+            }
+
+            function render() {
+
+            //recusrive gameloop/animation frame offered by browser
+            window.requestAnimationFrame(render);
+
+
+            //clear background and paint it red
+            gl.clearColor(0.0, 0.0, 1.0, 1.0);
+
+            gl.clear(gl.COLOR_BUFFER_BIT);
+
+
+
+            //use shader program
+            gl.useProgram(program);
+
 
 
             //bind geometry to sahder program
@@ -107,20 +140,19 @@ and open the template in the editor.
 
             gl.STATIC_DRAW);
 
-            //clear background and paint it red
-            gl.clearColor(1.0, 0.0, 0.0, 1.0);
-
-            gl.clear(gl.COLOR_BUFFER_BIT);
-
-
             positionLocation = gl.getAttribLocation(program, "a_position");
             gl.enableVertexAttribArray(positionLocation);
 
             gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
 
-            //draw call
+
+
+            var tLocation = gl.getUniformLocation(program, "t");
+            gl.uniform1f(tLocation, someProgress);
+
+            someProgress += 0.01;
+
             gl.drawArrays(gl.TRIANGLES, 0, 6);
-            
             }
         </script>
 
