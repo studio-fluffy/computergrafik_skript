@@ -32,10 +32,7 @@ and open the template in the editor.
             varying float T;
             
             void main() {
-                float cy = cos(0.1*gl_FragCoord.y);
-                float cx = cos(0.1*gl_FragCoord.x);
-
-            gl_FragColor = vec4(abs(cx) ,abs(cy),0.0,1.0);
+              gl_FragColor = vec4(vec3(abs(sin(T)) ,1.0,0.0),1.0);
             }
         </script>
 
