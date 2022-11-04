@@ -107,7 +107,7 @@ v \sim w \Leftrightarrow v = \lambda w \text{ für ein } \lambda \neq 0 \in \mat
 Wir haben die Abbildung
 \begin{align*}
 \mathbb{A}^3 & \to \mathbb{P}^3 \\
-\begin{pmatrix} p_1 \\ p_2 \\ p_3 \end{pmatrix} & \mapsto \begin{pmatrix} p_1 \\ p_2 \\ p_3  \\  1\end{pmatrix} 
+\begin{pmatrix} p_1 \\ p_2 \\ p_3 \end{pmatrix} & \mapsto \begin{bmatrix} p_1 \\ p_2 \\ p_3  \\  1\end{bmatrix} 
 \end{align*}
 und nennen das Bild eines Punktes unter dieser Abbildung die homogenen Koordinaten.
 \end{block}
@@ -119,8 +119,8 @@ und nennen das Bild eines Punktes unter dieser Abbildung die homogenen Koordinat
 \begin{block}{Homogene Koordinaten}
 Auf der Menge der homogenen Koordinaten haben wir die Umkehrabbildung
 \begin{align*}
-& \mathbb{P}^3 - \Biggl \{\begin{pmatrix} p_1 \\ p_2 \\ p_3  \\ p_4 \end{pmatrix}\Bigg | \; p_{4} = 0 \Biggr \}   \to \mathbb{A}^3 \\
-& \begin{pmatrix} p_1 \\ p_2 \\ p_3  \\  p_{4} \end{pmatrix}   \mapsto \begin{pmatrix}  \frac{p_1}{ p_{4}} \\ \frac{p_2}{ p_{4}}  \\ \frac{p_3}{ p_{4}}  \end{pmatrix}  \; .
+& \mathbb{P}^3 - \Biggl \{\begin{bmatrix} p_1 \\ p_2 \\ p_3  \\ p_4 \end{bmatrix}\Bigg | \; p_{4} = 0 \Biggr \}   \to \mathbb{A}^3 \\
+& \begin{bmatrix} p_1 \\ p_2 \\ p_3  \\  p_{4} \end{bmatrix}   \mapsto \begin{pmatrix}  \frac{p_1}{ p_{4}} \\ \frac{p_2}{ p_{4}}  \\ \frac{p_3}{ p_{4}}  \end{pmatrix}  \; .
 \end{align*}
 \end{block}
 \end{frame}
@@ -130,10 +130,10 @@ Auf der Menge der homogenen Koordinaten haben wir die Umkehrabbildung
     \frametitle{Homogene Koordinaten}
 \framesubtitle{}
 \begin{block}{Ferne Punkte}
-Die Menge der Punkte $F_3 := \Biggl \{\begin{pmatrix} p_1 \\ p_2 \\ p_3  \\ p_4 \end{pmatrix}\Bigg | \; p_{4} = 0 \Biggr \} $ heissen unendlich ferne Punkte.
+Die Menge der Punkte $F_3 := \Biggl \{\begin{bmatrix} p_1 \\ p_2 \\ p_3  \\ p_4 \end{bmatrix}\Bigg | \; p_{4} = 0 \Biggr \} $ heissen unendlich ferne Punkte.
 
 \begin{align*}
- \begin{pmatrix} p_1 \\ p_2 \\ p_3  \\ 0 \end{pmatrix}  =\lim_{n \to \infty} \begin{pmatrix} p_1 \\ p_2 \\ p_3  \\ \frac{1}{n} \end{pmatrix}  \cong  \lim_{n \to \infty} n \cdot  \begin{pmatrix} p_1 \\ p_2 \\ p_3 \end{pmatrix} 
+ \begin{bmatrix} p_1 \\ p_2 \\ p_3  \\ 0 \end{bmatrix}  =\lim_{n \to \infty} \begin{bmatrix} p_1 \\ p_2 \\ p_3  \\ \frac{1}{n} \end{bmatrix}  \cong  \lim_{n \to \infty} n \cdot  \begin{bmatrix} p_1 \\ p_2 \\ p_3 \end{bmatrix} 
 \end{align*}
 \end{block}
 
@@ -193,8 +193,8 @@ realisieren die Zentralprojektion auf die Ebene parallel zur $X-Y$-Ebene und Aug
 Die Zentralprojektion auf die Ebene parallel zur $X-Y$-Ebene und Augenpunkt im Ursprung mit Augendistanz $d$ durch die Hintereinanderausführung folgender Abbildungen darstellen:
 \begin{align*}
 & persp_{xy} :\mathbb{A}^3   \to \mathbb{P}^3    \to  \mathbb{P}^3    \to \mathbb{P}^2    \to \mathbb{A}^2  \\
-&\begin{pmatrix} x \\ y \\ z \end{pmatrix} \mapsto \begin{pmatrix} x \\ y \\ z \\ 1 \end{pmatrix}   \mapsto K_{persp_{xy}} \cdot  \begin{pmatrix} x \\ y \\ z \\ 1 \end{pmatrix} =   \begin{pmatrix} x \\ y \\ z \\ \frac{z}{d}  \end{pmatrix} \\
- & \mapsto K_{orth_{xy}} \cdot   \begin{pmatrix} x \\ y \\ z \\ \frac{z}{d}  \end{pmatrix}=   \begin{pmatrix} x \\ y \\ \frac{z}{d} \end{pmatrix}   \mapsto 
+&\begin{pmatrix} x \\ y \\ z \end{pmatrix} \mapsto \begin{bmatrix} x \\ y \\ z \\ 1 \end{bmatrix}   \mapsto K_{persp_{xy}} \cdot  \begin{bmatrix} x \\ y \\ z \\ 1 \end{bmatrix} =   \begin{bmatrix} x \\ y \\ z \\ \frac{z}{d}  \end{bmatrix} \\
+ & \mapsto K_{orth_{xy}} \cdot   \begin{bmatrix} x \\ y \\ z \\ \frac{z}{d}  \end{bmatrix}=   \begin{bmatrix} x \\ y \\ \frac{z}{d} \end{bmatrix}   \mapsto 
  \begin{pmatrix}  \frac{x}{\frac{z}{d} } \\   \frac{y}{\frac{z}{d} } \end{pmatrix}
  \end{align*}
 
