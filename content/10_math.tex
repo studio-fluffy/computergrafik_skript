@@ -1,0 +1,923 @@
+\section{Mathematische Werkzeuge}
+
+\subsection{Lineare Algebra}
+\subsubsection{Vektoren und Matrizen}
+Wir wollen zunächst  den Vektorraum $\mathbb{R}^n$ einführen. Hierbei ist $n$ eigentlich immer $2,3$ oder $4$.
+Zunächst ist der $\mathbb{R}^n$  eine Menge, nämlich die Menge der $n$-dimensionalen Vektoren 
+\begin{align*}
+\mathbb{R}^n : = \Biggl \{
+\begin{pmatrix}
+x_1 \\ x_2 \\ \vdots \\ x_n
+\end{pmatrix} \Bigg | \; x_1, x_2, \hdots ,x_n \in \mathbb{R}
+ \Biggr \}  \; .
+\end{align*}
+Auf dieser Menge der Vektoren definiert man die Addition
+\begin{align*}
++ : \mathbb{R}^n \times  \mathbb{R}^n   & \to \mathbb{R}^n \\
+\begin{pmatrix}
+x_1 \\ x_2 \\ \vdots \\ x_n
+\end{pmatrix}  +  
+\begin{pmatrix}
+y_1 \\ y_2 \\ \vdots \\ y_n
+\end{pmatrix} 
+&  :=  \begin{pmatrix}
+x_1 + y_1 \\ x_2  + y_2 \\ \vdots \\ x_n + y_n
+\end{pmatrix} 
+\end{align*}
+
+und die sogenannte Skalarmultiplikation 
+\begin{align*}
+\cdot : \mathbb{R} \times  \mathbb{R}^n   & \to \mathbb{R}^n \\
+\lambda \cdot \begin{pmatrix}
+x_1 \\ x_2 \\ \vdots \\ x_n
+\end{pmatrix}  
+&  :=  \begin{pmatrix}
+\lambda  \cdot x_1  \\  \lambda \cdot x_2 \\ \vdots \\  \lambda \cdot x_n 
+\end{pmatrix} \; . 
+\end{align*}
+Das Element $\lambda  \in \mathbb{R}$ nennt man auch Skalar.
+\begin{Definition}
+Der Vektorraum $\mathbb{R}^n$ ist das Tripel 
+$(\mathbb{R}^n, + , \cdot )$.
+\end{Definition}
+
+\begin{Beispiel}
+\begin{align*}
+\begin{pmatrix}
+1 \\ 2  \\  3
+\end{pmatrix}  +  
+\begin{pmatrix}
+3 \\ 2  \\ 1
+\end{pmatrix} 
+=  \begin{pmatrix}
+4 \\ 4  \\ 4
+\end{pmatrix} 
+\end{align*}
+
+\begin{align*}
+\begin{pmatrix}
+ 1 \\  1 
+\end{pmatrix}  +  
+\begin{pmatrix}
+-1  \\  -1 
+\end{pmatrix} 
+=  \begin{pmatrix}
+0  \\  0 
+\end{pmatrix}  
+\end{align*}
+
+\begin{align*}
+\begin{pmatrix}
+1 \\ -1  \\  -\frac{1}{2}  \\ 2 
+\end{pmatrix}  +  
+\begin{pmatrix}
+0  \\  0 \\  0 \\ 0
+\end{pmatrix} 
+=  \begin{pmatrix}
+1 \\ -1  \\  -\frac{1}{2}  \\ 2 
+\end{pmatrix} 
+\end{align*}
+
+\begin{align*}
+-1 \cdot
+\begin{pmatrix}
+1 \\ 1  \\  1 
+\end{pmatrix}  
+=  \begin{pmatrix}
+-1   \\ -  1    \\  -1  
+\end{pmatrix} 
+\end{align*}
+
+ 
+\begin{align*}
+\pi \cdot
+\begin{pmatrix}
+1 \\ 2  \\  3 \\ 4
+\end{pmatrix}  
+=  \begin{pmatrix}
+\pi   \\ 2  \pi  \\  3 \pi \\  4  \pi
+\end{pmatrix} 
+\end{align*}
+
+\begin{Bemerkung}
+Für alle Skalare $\lambda, \mu \in \mathbb{R}$ und Vektoren $u,v \in  \mathbb{R}^n$ gelten die  Rechenregeln
+\begin{align*}
+\lambda \cdot (u +v) = \lambda \cdot u + \lambda \cdot v \\
+(\lambda + \mu)  \cdot u  = \lambda  \cdot u + \mu  \cdot u \; .
+\end{align*}
+\end{Bemerkung}
+
+\begin{Definition}
+Für ein $u,v \in  \mathbb{R}^n$ sind die folgenden Kurz-Notationen üblich
+\begin{align*}
+-u :=  -1 \cdot u \\
+u -v := u + (-v) := u + (-1 \cdot v) 
+\end{align*}  
+\end{Definition}
+\end{Beispiel}
+
+\begin{Definition}
+Eine $n \times m$ Matrix ist ein Objekt der Form
+\begin{align*}
+(a_{ij})_{ij} := \begin{pmatrix}
+a_{1,1} &  a_{1,2} & a_{1,3} & \cdots & a_{1,m}   \\  
+a_{2,1} &  a_{2,2} & a_{2,3} & \cdots & a_{2,m} \\  
+ \vdots &  \vdots &\vdots & \vdots & \vdots & \\ 
+a_{i,1} &  a_{i,2} & a_{i,3} & \cdots & a_{i,m} \\
+ \vdots &  \vdots &\vdots & \vdots & \vdots & \\ 
+a_{n,1} &  a_{n,2} & a_{n,3} & \cdots & a_{n,m}  
+\end{pmatrix}  
+\end{align*} 
+mit $a_{i,j} \in \mathbb{R}$ für alle $i = 1, \hdots, n$ und $j = 1, \hdots m$.
+\end{Definition}
+
+
+\begin{Bemerkung}
+Ein Vektor der dimension $n$ ist eine $n \times 1$-Matrix.
+\end{Bemerkung}
+\begin{Definition}
+Ist $A = (a_{ij})_{ij}$ eine $n \times m$ und $B = (b_{kl})_{kl}$ eine $m \times p$ Matrix so
+ist das Matrizenprodukt definiert als die $n \times p$ Matrix
+\begin{align*}
+A \cdot B := \Biggl( \sum_{j=1}^{m}a_{ij} \cdot b_{jl} \Biggr)_{il} \; .
+\end{align*}
+Sind $A$ und $B$  zwei $n \times m$-Matrizen so ist ihre Summer definiert durch 
+\begin{align*}
+A + B := \biggl( a_{ij} + b_{ij} \biggr)_{ij} \;.
+\end{align*}
+Für ein $\lambda \in \mathbb{R}$ definieren wir die Skalarmultiplikation
+\begin{align*}
+\lambda \cdot A := \biggl( \lambda \cdot a_{ij} \biggr)_{ij} \;.
+\end{align*}
+\end{Definition}
+
+
+\begin{Definition}
+Die $n$-dimensionale Einheitsmatrix ist definiert durch
+\begin{align*}
+I_n : = \begin{pmatrix}
+1 & 0 & 0 & \cdots & 0 & 0 \\
+0 & 1 & 0 & \cdots & 0 & 0 \\
+\vdots &  & \ddots &  & \vdots & \vdots \\
+\vdots &  &  &  \ddots & 0 & 0 \\
+0 & 0 & 0 & \cdots & 1 & 0 \\
+0 & 0 & 0 & \cdots & 0 & 1
+\end{pmatrix} \; .
+\end{align*}
+\end{Definition}
+
+\begin{Bemerkung}
+Sind $A$ und $B$ beides $n\times n$-Matrizen, so ist im Allgemeinen
+\begin{align*}
+A \cdot B \neq B \cdot A \; .
+\end{align*}
+Für die $n$-te Einheitsmatrix $I_n$ gilt jedoch immer
+\begin{align*}
+A \cdot I_n =  I_n \cdot A  = A \; .
+\end{align*}
+\end{Bemerkung}
+
+
+\begin{Definition}
+Für eine $2 \times 2$-Matrix definieren wir die Determinante
+\begin{align*}
+\det : M^{n \times n}  & \to \mathbb{R} \\
+\det \biggl ( 
+\begin{pmatrix}
+a & b \\ c & d
+\end{pmatrix}
+ \biggr)  & := ad - bc
+\end{align*}
+\end{Definition}
+
+
+\begin{Satz}
+Für eine $n \times n$ Matrix $A = (a_{ij})_{ij}$ definieren wir die Determinante durch die Rekursionsformel
+\begin{align*}
+det (A) = \sum_{j=1}^n  (-1)^{i+j} a_{ij} det (A_{ij})
+\end{align*}
+und $det (a) = a$ für eine $1 \times 1$-Matrix $a$.
+wobei $A_{ij}$ die Matrix ist, die aus $A$ durch Streichen der $i$-ten Zeile und der $j$-ten Spalte entsteht.
+Diese Definition ist unabhängig von der Wahl von $i$. (Entwickeln nach der $i-ten Zeile$).
+\end{Satz}
+
+\begin{Satz}
+Für alle $n \times n$-Matrizen $A,B$ gilt
+\begin{align*}
+\det(A \cdot B) = \det(A) \cdot \det(B)
+\end{align*} \; .
+\end{Satz}
+\begin{Satz}
+Sei $A$ eine $n \times n$ Matrix. Dann existiert genau dann eine Matrix $A^{-1}$ mit
+\begin{align*}
+A \cdot A^{-1}  = A^{-1} \cdot A  = I_n \; ,
+\end{align*}
+wenn $\det(A) \neq 0$. $A^{-1}$ ist eindeutig bestimmt.
+\end{Satz}
+\begin{Bemerkung}
+Ist $v$ ein $n$-dimensionaler Vektor und $A$ eine $m\times n$-Matrix, so ist 
+$A \cdot v$ ein $m$-dimensionaler Vektor.
+\end{Bemerkung}
+
+\begin{Definition}
+Ist $A := (a_{ij}))_{ij}$ eine $n \times m$-Matrix, so heißt die $m \times n$-Matrix 
+$A ^t := (a_{ji}))_{ij}$ die transponierte Matrix. 
+\end{Definition}
+
+
+\begin{Definition}
+Ist insbesondere $v= \begin{pmatrix}
+x_1 \\ \vdots \\ x_k
+\end{pmatrix}
+$ ein $k$-dimensionaler Vektor, so heisst
+$v^t= \begin{pmatrix}
+x_1 & \cdots & x_n
+\end{pmatrix}$ der transponierte Vektor, welcher auch eine $1\times n$-Matrix ist.
+\end{Definition}
+
+\begin{Satz}
+Für alle $n \times m$-Matrizen $A$ und $m$-dimensionale Vektoren $u,v$ gilt
+\begin{align*}
+A \cdot (\lambda \cdot u + \mu \cdot v) = \lambda \cdot A \cdot u +  \mu  \cdot A \cdot v \; .
+\end{align*}
+\end{Satz}
+
+\begin{Definition}
+Vektoren $v_1, \hdots ,v_k \in \mathbb{R}^n$ heißen linear unabhängig, falls für $\lambda_i \in \mathbb{R}, \; i=1, \hdots ,k $ mit
+\begin{align*}
+\sum_{i= 1}^k \lambda_i \cdot v_i = 0
+\end{align*} 
+stets $\lambda_i = 0$ folgt für alle $i = 1, \hdots, k$. 
+\end{Definition}
+
+\begin{Satz}
+Die Vektoren $v_1, \hdots ,v_k \in \mathbb{R}^n$ sind genau dann linear abhängig, wenn man 
+mit Hilfe des Gaussalgorithmus in der Matrix 
+\begin{align*}
+\begin{pmatrix}
+v_1^t \\   \text{---} \\ \vdots \\  \text{---} \\ v_k^t
+\end{pmatrix}
+\end{align*}
+eine Nullzeile erzeugen kann.
+\end{Satz}
+
+\begin{Bemerkung}
+Für $k>n$ sind $v_1, \hdots ,v_k \in \mathbb{R}^n$ stets linear abhängig.
+\end{Bemerkung}
+
+\begin{Definition}
+Für Vektoren $v_1, \hdots , v_k \in \mathbb{R}^n$ heißt die Menge
+\begin{align*}
+span(v_1, \hdots v_k) : = \biggl\{ \sum_{i=1}^k \lambda_i \cdot v_i \; | \; \lambda_i \in \mathbb{R}  \biggr\} \subseteq \mathbb{R}^n
+\end{align*}
+der von ihnen aufgespannte lineare Unterraum. Diese Definition ist offensichtlich unabhängig von der Reihenfolge. 
+Eine Menge von Vektoren $\{ w_1, \hdots , w_l \}$ heißt Basis von
+$span(v_1, \hdots v_k)$, falls $w_1, \hdots , w_l$ linear unabhängig sind und
+$span(w_1, \hdots w_l) = span(v_1, \hdots v_k)$ gilt. $l$ heißt dann auch die Dimension von $span(v_1, \hdots v_k)$. 
+\end{Definition}
+
+
+\begin{Satz}
+Ist $B:= \{ b_1, \hdots , b_n \}$ eine Menge linear unabhängiger $n$-dimensionaler Vektoren, so ist
+\begin{align*}
+span(b_1, \hdots ,b_n) = \mathbb{R}^n \; .
+\end{align*}
+Wir nennen dann die \emph{geordnete} Menge $B$ eine Basis des $\mathbb{R}^n$. 
+\end{Satz}
+
+
+\begin{Definition}
+Wir bezeichnen die Basis $E:= \{ e_1, \hdots , e_n \}$ des $\mathbb{R}^n$ mit 
+\begin{align*}
+e_i : = \begin{pmatrix}
+0 \\ \vdots \\ 0 \\ 1  \\ 0 \\ \vdots \\ 0
+\end{pmatrix}
+\begin{matrix}
+ \\   \\  \leftarrow \text{i-te Stelle}  \\ \\  \\ 
+\end{matrix}
+\end{align*}
+als Standardbasis des $\mathbb{R}^n$.
+\end{Definition}
+
+\begin{Definition}
+Sei $B:= \{ b_1, \hdots , b_n \}$ eine Basis des $\mathbb{R}^n$ und $v \in \mathbb{R}^n$. Dann gibt es nach dem letzten Satz Skalare $\lambda_1, \hdots , \lambda_n \in \mathbb{R}$, so dass sich $v$ als Linearkombination 
+\begin{align*}
+v = \sum_{i=1}^n \lambda_i \cdot b_i 
+\end{align*}
+ausdrücken lässt. Schreibt man diese $\lambda_i$ wieder in einen Vektor, so erhalten wir eine Abbildung
+\begin{align*}
+\theta_B : \mathbb{R}^n & \to \mathbb{R}^n \\
+\begin{pmatrix}
+v_1 \\ \vdots \\ v_n
+\end{pmatrix}
+& \mapsto 
+\begin{pmatrix}
+\lambda_1 \\ \vdots \\ \lambda_n
+\end{pmatrix} \; .
+\end{align*}
+Man nennt $\theta_B(v)$ die Darstellung von $v$ zur Basis $B$.
+\end{Definition}
+
+\begin{Bemerkung}
+Für die Standardbasis $E$ des $\mathbb{R}^n$ ist $\theta_E(v) = v$ für alle $v \in \mathbb{R}^n$, also $\theta_S = \text{id}$.
+\end{Bemerkung}
+
+\begin{Definition}
+Sei $B:= \{ b_1, \hdots , b_n \}$ eine Basis des $\mathbb{R}^n$ und $v \in \mathbb{R}^n$. Dann definieren wir  
+\begin{align*}
+M_B  = \biggl ( b_1 \; \bigg | \;  b_2 \; \bigg | \;  \cdots  \; \bigg | \;  b_n \biggr )^{-1}   \;.
+\end{align*}
+\end{Definition}
+
+
+\begin{Satz}
+Sei $B:= \{ b_1, \hdots , b_n \}$ eine Basis des $\mathbb{R}^n$ und $v \in \mathbb{R}^n$. Dann ist 
+\begin{align*}
+\theta_B (v) = M_B \cdot v   
+\end{align*}
+\end{Satz}
+
+
+
+\begin{Definition}
+Seien $B:= \{ b_1, \hdots , b_n \}$ und $B':= \{ b'_1, \hdots , b'_n \}$ zwei Basen des $\mathbb{R}^n$.
+Dann heißt $M_{B}^{B'} : = M_{B'}  \cdot M_{B}^{-1} $ die Basiswechselmatrix von $B$ nach $B'$. Wir haben also folgende Situation:
+
+\begin{align*}
+\xymatrix{
+\mathbb{R}^n  \ar[d]^{I_n} &  & \ar[ll]^{M_B^{-1}} \mathbb{R}^n \ar[d]^{M_{B}^{B'}} \\
+\mathbb{R}^n  \ar[rr]^{M_{B'}} & &  \mathbb{R}^n
+}
+\end{align*}
+\end{Definition}
+
+\begin{Definition}
+Die Abbildung 
+\begin{align*}
+< \cdot \; , \;  \cdot > : \mathbb{R}^n \times \mathbb{R}^n & \to \mathbb{R} \\
+\Biggl < \begin{pmatrix}
+x_1 \\ \vdots \\ x_n
+\end{pmatrix},  \begin{pmatrix}
+y_1 \\ \vdots \\ y_n
+\end{pmatrix}  \Biggr> & := \begin{pmatrix}
+x_1 \\ \vdots \\ x_n
+\end{pmatrix}^t \cdot \begin{pmatrix}
+y_1 \\ \vdots \\ y_n  
+\end{pmatrix}  =
+\begin{pmatrix}
+x_1 & \cdots & x_n
+\end{pmatrix} \cdot \begin{pmatrix}
+y_1 \\ \vdots \\ y_n  
+\end{pmatrix} = \sum_{i=1}^n  x_i \cdot y_i
+\end{align*}  
+heißt Skalarprodukt.
+\end{Definition}
+
+
+
+\begin{Satz}
+Für alle $u,v,w,l \in \mathbb{R}^n$ und $\lambda, \mu, \tau, \nu \mathbb{R}$ gilt
+\begin{align*}
+<\lambda u + \mu v, \tau w> = \lambda \tau<u,w> + \mu \tau <v,w> \\
+<\lambda u , \tau w + \nu l> = \lambda \tau<u,w> + \lambda \nu <u,l>
+\end{align*}
+\end{Satz}
+\begin{Definition}
+Die Abbildung 
+\begin{align*}
+|| \cdot || &: \mathbb{R}^n  \to \mathbb{R} \\
+||v||  &:= \sqrt{<v,v>} 
+\end{align*}  
+heißt Norm.
+\end{Definition}
+
+\begin{Definition}
+Zwei vom Nullvektor verschiedene Vektoren $u,v \in \mathbb{R}^n$ heißen orthogonal, falls $<u,v> = 0$ ist. 
+Man sagt auch sie stehen senkrecht aufeinander und benutzt auch die Bezeichnung $u \perp v$. 
+\end{Definition}
+
+
+\begin{Satz}
+Der Kosinus des Innenwinkel $\varphi$ zweier Vektoren $u,v$ lässt sich durch 
+\begin{align*}
+\cos(\varphi) = \frac{<u,v>}{||u|| \cdot ||v||}
+\end{align*}
+\end{Satz}
+
+\begin{Definition}
+Ein Vektor $v \in \mathbb{R}$ heißt normal, falls $||v|| = 1$ ist.
+Ist $w \in \mathbb{R}^n$ ein beliebiger Vektor, so heißt $\frac{1}{||w||} w$ die Normalisierung von $w$.
+\end{Definition}
+
+\begin{Definition}
+Eine Basis  $B:= \{ b_1, \hdots , b_n \}$ heißt Orthonormalbasis (kurz ONB), falls 
+\begin{align*}
+<b_i, b_j> = \begin{cases}  1 \; \text{falls }  i = j  \\ 0 \; \text{sonst}\end{cases}
+\end{align*}
+gilt. Insbesondere sind alle $b_i$ normal.
+\end{Definition}
+
+\begin{Algorithmus}
+Seien  $v_1, \hdots v_n$ linear unabhängige Vektoren.  Dann lässt sich daraus durch folgenden Algorithmus 
+eine ONB generieren: 
+\begin {align*}
+b_i ' & := v_i - \sum_{j=1}^{i-1} <v_i, b_j> b_j \\
+b_i  & :=  \frac{1}{||b'_i||} b_i'
+\end{align*}
+und Rekursionsanfang $b_1' = v_1$.
+\end{Algorithmus}
+
+
+Im $\mathbb{R}^3$ gibt es eine besonders einfache Methode aus zwei Vektoren einen Vektor zu generieren, der auf den Ausgangs-Vektoren
+senkrecht steht.
+\begin{Definition}
+Für $u = \begin{pmatrix} u_1 \\ u_2 \\ u_3 \end{pmatrix}$ und $v= \begin{pmatrix} v_1 \\ v_2 \\ v_3 \end{pmatrix}$ heißt
+\begin{align*}
+u \times v :=  \begin{pmatrix} u_2 v_3 - u_3v_2  \\ u_3 v_1 - u_1v_3 \\ u_1 v_2 - u_2 v_1\end{pmatrix} 
+\end{align*}
+das Kreuzprodukt von $u$ und $v$.
+\end{Definition}
+
+\begin{Bemerkung}
+Es gilt
+\begin{itemize}
+\item $<u \times v, u> =  <u \times v, v> = 0$ 
+\item $u \times v = - (v \times u)$
+\item $u \times v = 0$ genau dann, wenn $u$ und $v$ linear abhängig sind.
+\end{itemize}
+\end{Bemerkung}
+
+\begin{Bemerkung}
+Ist  $B:= \{ b_1, \hdots , b_n \}$  eine ONB, so gilt
+\begin{align*}
+M_{B}^{-1} = M_{B}^t
+\end{align*}
+\end{Bemerkung}
+
+\begin{Definition}
+Eine Matrix $O \in \mathbb{M}^{n \times n}$ heißt orthogonal, falls
+$O^{-1} = O^t$ ist. 
+\end{Definition}
+
+\begin{Satz}
+Eine Matrix $O \in \mathbb{M}^{n \times n}$ ist genau dann  orthogonal, falls
+\begin{align*}
+\det(O) \in  \{-1, 1 \} \; .
+\end{align*}
+Ist $\det(O) = 1$, so nennen wir $O$ eine Drehung und 
+$SO(n) := \{ O \in \mathbb{M}^{n \times n} | \det(O) = 1\}$ die Drehgruppe (oder auch spezielle orthogonale Gruppe).
+\end{Satz}
+
+\begin{Satz}
+Sei $O \in \mathbb{M}^{n \times n}$ eine orthogonale Matrix, dann gilt für alles $v,w \in \mathbb{R}^n$
+\begin{align*}
+< O \cdot v \; , \;  O \cdot w > = <v \; , \; w>
+\end{align*}
+und somit insbesondere 
+\begin{align*}
+|| O \cdot v|| = ||v|| \; .
+\end{align*}
+\end{Satz}
+
+
+\begin{Definition}
+Eine $2 \times 2$-Drehmatrix ist eine Matrix der Form
+\begin{align*}
+\begin{pmatrix}
+\cos(\varphi) & \pm \sin(\varphi) \\  \mp \sin(\varphi) & \cos(\varphi)
+\end{pmatrix}
+\end{align*}
+für ein $\varphi \in [0, 2 \pi]$. 
+\end{Definition}
+
+\begin{Bemerkung}
+Eine $2 \times 2$-Drehmatrix ist eine orthogonale Matrix.
+\end{Bemerkung}
+
+
+
+\begin{Definition}
+Eine elementare $3 \times 3$-Drehmatrix ist eine Matrix der Form
+\begin{align*}
+\begin{pmatrix}
+1 & 0 & 0 \\
+0 & \cos(\varphi) & \pm \sin(\varphi) \\ 
+ 0 & \mp \sin(\varphi) & \cos(\varphi)
+\end{pmatrix}, \;
+\begin{pmatrix}
+ \cos(\varphi) & 0 &  \pm \sin(\varphi) \\ 
+0 & 1 & 0 \\ 
+\mp \sin(\varphi) & 0& \cos(\varphi)
+\end{pmatrix}, \;
+\begin{pmatrix}
+ \cos(\varphi) & \pm \sin(\varphi)  & 0\\ 
+ \mp \sin(\varphi) & \cos(\varphi) & 0 \\
+0 & 0 & 1 
+\end{pmatrix}. 
+\end{align*} 
+für ein $\varphi \in [0, 2 \pi]$. 
+\end{Definition}
+
+
+\begin{Satz}
+Jede Drehung  $O \in SO(3)$  lässt sich zerlegen in ein Produkt
+\begin{align*}
+O = 
+\begin{pmatrix}
+1 & 0 & 0 \\
+0 & \cos(\phi) & \pm \sin(\phi) \\ 
+ 0 & \mp \sin(\phi) & \cos(\phi)
+\end{pmatrix}
+\cdot
+\begin{pmatrix}
+ \cos(\psi) & 0 &   \sin(\psi) \\ 
+0 & 1 & 0 \\ 
+- \sin(\psi) & 0& \cos(\psi)
+\end{pmatrix}
+\cdot \begin{pmatrix}
+ \cos(\xi) &  \sin(\xi)  & 0\\ 
+ - \sin(\xi) & \cos(\xi) & 0 \\
+0 & 0 & 1 
+\end{pmatrix} 
+\end{align*} 
+Die Winkel $\phi, \psi, \xi$ heißen  Eulerwinkel. 
+\end{Satz}
+
+\begin{Bemerkung}
+Die  Zerlegung  $O \in SO(3)$  einer Drehung in obiges Produkt ist  nicht eindeutig.
+Ein anschauliches Beispiel dafür liefert der sogenannte "Gimbal lock". $SO(3)$ ist also nicht das Produkt von drei Intervallen sondern
+es ist $SO(3) = S^{3}/ \{ \pm 1 \}$.
+\end{Bemerkung}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/gimbalLock.jpg}
+    \caption{Kardansche Aufhängung und Gimbal lock}
+    \label{fig:gimbal+lock}
+\end{figure}
+
+\begin{Bemerkung}
+Man kann bei der Produktzerlegung auch andere elementare Drehmatratzen (elementare Drehachsen)  wählen, wobei
+eine spezielle Wahl  zu den in der Luft und Raumfahrt verwendeten "Roll, Nick, Gier" Winkeln führen.
+\end{Bemerkung}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/pitch.png}
+    \caption{Roll, Nick und Gier Winkel}
+    \label{fig:roll-pitch-yaw}
+\end{figure}
+
+\subsection{Affiner Raum und affine Abbildungen}
+Der Affine Raum $\mathbb{A}^n$ ist ein Tupel
+\begin{align*}
+\bigl( \mathbb{R}^n, (\mathbb{R}^n, + , \cdot ) \bigr )
+\end{align*}
+zusammen mit den Abbildung 
+\begin{align*}
+\text{---} : \mathbb{R}^n \times \mathbb{R}^n  & \to (\mathbb{R}^n, + , \cdot ) \\
+\overline{PQ} & := Q-P  
+\end{align*}
+und
+\begin{align*}
++ : \mathbb{R}^n \times (\mathbb{R}^n, + , \cdot )   & \to  \mathbb{R}^n\\
+\begin{pmatrix}
+P_1 \\ \vdots \\ P_n
+\end{pmatrix} + \begin{pmatrix}
+v_1 \\ \vdots \\ v_n
+\end{pmatrix} & := \begin{pmatrix}
+P_1  + v_1 \\ \vdots \\ P_n + v_n 
+\end{pmatrix}   \;.
+\end{align*}
+Die Elemente (Vektoren) aus $\mathbb{R}^n$ nennt man auch  Punkte in Abgrenzung zu den Vektoren aus $(\mathbb{R}^n, + , \cdot )$.  
+Für Punkte $P,Q \in \mathbb{R}^n$ ist also $\overline{PQ}$ ein Vektor, auch Verbindungsvektor genannt.
+
+\begin{Definition}
+Ist $B:= \{b_1, \hdots , b_n \}$ eine Basis des Vektorraums  $(\mathbb{R}^n, + , \cdot )$ und $P \in \mathbb{A}$ ein Punkt, so nennen wir das Tupel
+$(P, B)$ eine affine Basis. Für jeden Punkt $Q$ gibt es dann also Skalare $\lambda_1,\hdots ,\lambda_n$ mit 
+\begin{align*}
+Q = P + \sum_{i=1}^{n} \lambda_i \cdot b_i  \; .
+\end{align*}
+Der Punkt $\begin{pmatrix}  \lambda_1 \\  \vdots \\  \lambda_n \end{pmatrix}$ heißt die Darstellung von $Q$ bezüglich der affinen Basis $(P,B)$. 
+\end{Definition}
+
+
+
+\begin{Definition}
+Abbildungen der Form
+\begin{align*}
+\phi &: \mathbb{A}^n \to \mathbb{A}^n \\
+\phi(P) & := A \cdot P + t
+\end{align*} 
+mit $A \in M^{n \times n}$ und $t \in (\mathbb{R}^n, + , \cdot )$ heißen affine Abbildungen.
+Insbesondere heißt eine affine Abbildung mit $A = I_n$ und $t \neq 0$ Translation.
+\end{Definition}
+
+\begin{Bemerkung}
+Eine Affine Abbildung
+\begin{align*}
+\phi &: \mathbb{A}^n \to \mathbb{A}^n \\
+\phi(P) & := A \cdot P + t
+\end{align*} 
+ist genau dann invertierbar, falls $\det(A) \neq 0$ ist und die Inverse Abbildung ist dann
+\begin{align*}
+\phi^{-1} &: \mathbb{A}^n \to \mathbb{A}^n \\
+\phi^{-1}(P) & := A^{-1} \cdot P - A^{-1} \cdot t \; .
+\end{align*} 
+\end{Bemerkung}
+
+
+\begin{Definition}
+Sind $(P,B:= \{b_1, \hdots , b_n \})$  und $(P',B':= \{b'_1, \hdots , b'_n \})$ zwei affine Basen  und definieren wir 
+die Abbildung
+\begin{align*}
+\theta_{(P,B)} & :  \mathbb{A}^n \to \mathbb{A}^n \\
+\theta_{(P,B)}(Q) & := M_B \cdot Q - M_B \cdot P \; ,
+\end{align*}
+so erhalten wir analog zu der Situation in Vektorräumen
+\begin{align*}
+\xymatrix{
+\mathbb{A}^n  \ar[d]^{\text{id}} &  & \ar[ll]^{\theta_{(P,B)}^{-1}} \mathbb{A}^n \ar[d]^{\theta_{(P,B)}^{(P',B')}} \\
+\mathbb{A}^n  \ar[rr]^{\theta_{(P',B')}} & &  \mathbb{A}^n
+}
+\end{align*}
+mit $\theta_{(P,B)}^{(P',B')} (Q) :=   \theta_{(P',B')} \biggl ( \theta_{(P,B)}^{-1} (Q) \biggr)$.
+\end{Definition}
+
+
+\begin{Definition}
+Der Abstand von  $P,Q \in \mathbb{A}$  ist definiert durch
+\begin{align*}
+d : \mathbb{A}^n \times \mathbb{A}^n \to \mathbb{R}^n \\
+d(P,Q) := || \overline{PQ} || \; .
+\end{align*}
+\end{Definition}
+
+
+\subsubsection{Homogene Koordinaten und Projektionen}
+\label{subsub:math:affine-space:homog-coords-projection}
+\begin{Definition}
+Der projektive  Raum ist definiert als
+\begin{align*}
+\mathbb{P}^n := \mathbb{R}^{n+1} - \{ 0\} / \sim \\
+v \sim w \Leftrightarrow v = \lambda w \text{ für ein } \lambda \neq 0 \in \mathbb{R} \; . 
+\end{align*}
+\end{Definition}
+
+\begin{Satz}
+$\mathbb{P}^n := S^{n}/ \{\pm 1 \}$, $\mathbb{P}^1 = S^{1}$.
+\end{Satz}
+
+Wir haben die Abbildung
+\begin{align*}
+\mathbb{A}^n & \to \mathbb{P}^n \\
+\begin{pmatrix} p_1 \\ p_2 \\ \vdots \\ p_n \end{pmatrix} & \mapsto \begin{pmatrix} p_1 \\ p_2 \\ \vdots \\ p_n  \\  1\end{pmatrix} 
+\end{align*}
+und nennen das Bild eines Punktes unter dieser Abbildung die homogenen Koordinaten.
+Auf der Menge der homogenen Koordinaten haben wir die Umkehrabbildung
+\begin{align*}
+& \mathbb{P}^n - \Biggl \{ \begin{pmatrix} p_1 \\ p_2 \\ \vdots \\ p_n  \\  p_{n+1} \end{pmatrix} \Bigg | \; p_{n+1} = 0 \Biggr \}   \to \mathbb{A}^n \\
+& \begin{pmatrix} p_1 \\ p_2 \\ \vdots \\ p_n  \\  p_{n+1} \end{pmatrix}   \mapsto \begin{pmatrix}  \frac{p_1}{ p_{n+1}} \\ \frac{p_2}{ p_{n+1}}  \\ \vdots \\ \frac{p_n}{ p_{n+1}}  \end{pmatrix}  \; .
+\end{align*}
+
+
+Die Matrizenmultiplikation
+\begin{align*}
+\mathbb{R}^{n+1} \to \mathbb{R}^{n+1} \\
+v \mapsto A \cdot v
+\end{align*}
+setzt sich wegen der Eigenschaft $A \cdot (\lambda v) = \lambda A \cdot v$ zu einer Abbildung
+\begin{align*}
+\mathbb{P}^{n} \to \mathbb{P}^{n} \\
+p \mapsto A \cdot p
+\end{align*}
+fort. Wir können damit und mit der Definition der Matrix-Vektor-Multiplikation eine affine Abbildung 
+\begin{align*}
+\phi : \mathbb{R}^{n} \to \mathbb{R}^{n} \\
+\phi(v):=  A \cdot v + t
+\end{align*}
+in homogenen Koordinate ausdrücken durch eine Matrizenmultiplikation
+\begin{align*}
+\begin{pmatrix} v \\ 1\end{pmatrix} \mapsto \begin{pmatrix}  A  & t  \\ 0 &1\end{pmatrix} \cdot  \begin{pmatrix} v \\ 1\end{pmatrix}   \; .
+\end{align*}
+
+\begin{Definition}
+Die Abbildung 
+\begin{align*}
+persp_{xy} : \mathbb{A}^3 \to \mathbb{A}^2 \\
+\begin{pmatrix}  X \\ Y \\ Z\end{pmatrix}  \mapsto \begin{pmatrix}  \frac{X}{\frac{Z}{d} +1 } \\   \frac{Y}{\frac{Z}{d} +1 } \end{pmatrix}
+\end{align*}
+die Zentralprojektion auf die $X-Y$-Ebene mit Augendistanz $d$ beziehungsweise ist
+\begin{align*}
+\overline{persp}_{xy} : \mathbb{A}^3 \to \mathbb{A}^2 \\
+\begin{pmatrix}  X \\ Y \\ Z\end{pmatrix}  \mapsto \begin{pmatrix}  \frac{X}{\frac{Z}{d}  } \\   \frac{Y}{\frac{Z}{d}  } \end{pmatrix}
+\end{align*}  die Zentralprojektion auf die Ebene parallel zur $X-Y$-Ebene mit Abstand $d$ und  Augenpunkt im Ursprung.
+\end{Definition} 
+Die Motivation folgt direkt aus dem Strahlensatz.
+
+\begin{Bemerkung}
+Die Zentralprojektion auf die $X-Y$-Ebene mit Augendistanz $d$ lässt sich nicht durch Multiplikation mit einer  $2 \times 3$-Matrix realisieren.
+\end{Bemerkung}
+
+
+
+Definieren wir die Matrizen
+\begin{align*}
+K_{persp_{xy}} := \begin{pmatrix}  
+1   &  0 & 0 & 0  \\
+0   &  1 & 0 & 0  \\
+0   &  0 & 1 & 0  \\
+0   &  0 & \frac{1}{d} & 1  
+\end{pmatrix} 
+\end{align*}
+
+und 
+\begin{align*}
+K_{orth_{xy}} := \begin{pmatrix}  
+1   &  0 & 0 & 0  \\
+0   &  1 & 0 & 0  \\
+0   &  0 & 0 & 1  
+\end{pmatrix} \; ,
+\end{align*}
+
+
+so können wir die Zentralprojektion auf die $X-Y$-Ebene mit Augendistanz $d$ durch die Hintereinanderausführung folgender Abbildungen darstellen:
+\begin{align*}
+& persp_{xy} :\mathbb{R}^3   \to \mathbb{A}^3    \to  \mathbb{A}^3    \to \mathbb{A}^2    \to \mathbb{R}^2  \\
+&\begin{pmatrix} x \\ y \\ z \end{pmatrix} \mapsto \begin{pmatrix} x \\ y \\ z \\ 1 \end{pmatrix}   \mapsto K_{persp_{xy}} \cdot  \begin{pmatrix} x \\ y \\ z \\ 1 \end{pmatrix} =   \begin{pmatrix} x \\ y \\ z \\ \frac{z}{d} + 1 \end{pmatrix} \\
+ & \mapsto K_{orth_{xy}} \cdot   \begin{pmatrix} x \\ y \\ z \\ \frac{z}{d} + 1 \end{pmatrix}=   \begin{pmatrix} x \\ y \\ \frac{z}{d} + 1 \end{pmatrix}   \mapsto 
+ \begin{pmatrix}  \frac{x}{\frac{z}{d} +1 } \\   \frac{y}{\frac{z}{d} +1 } \end{pmatrix}
+ \end{align*}
+
+Analog für die andere Projektion mit der Matrix
+\begin{align*}
+K_{\overline{persp}_{xy}} := \begin{pmatrix}  
+1   &  0 & 0 & 0  \\
+0   &  1 & 0 & 0  \\
+0   &  0 & 1 & 0  \\
+0   &  0 & \frac{1}{d} & 0  
+\end{pmatrix}  \; .
+\end{align*}
+
+
+\subsection{Parameterdarstellungen}
+
+\begin{Definition}
+Eine Kurve ist eine  Abbildung 
+\begin{align*}
+c: I \subset \mathbb{R} \to \mathbb{R}^3 \\
+c(t) := \begin{pmatrix} x(t) \\  y(t) \\ z(t) \end{pmatrix}
+\end{align*}
+bei der die Funktionen $x, y, z : I \to \mathbb{R}$ stetig sind. Sie heisst differenzierbar, falls $x,y,z$ differenzierbar sind und die Ableitung ist dann definiert als 
+\begin{align*}
+c': I \subset \mathbb{R} \to \mathbb{R}^3 \\
+c'(t) := \begin{pmatrix} x'(t) \\  y'(t) \\ z'(t) \end{pmatrix} \; .
+\end{align*}
+ \end{Definition}
+
+\begin{Beispiel}
+Die Kurve 
+$c : [0, 2\pi]  \to  \mathbb{R}^3$, $c(t) :=  \begin{pmatrix} r \cos(t) \\ r  \sin(t) \\  0 \end{pmatrix}$
+beschreibt einen Kreis mit Radius $r$, der in der XY-Ebene liegt. Die Ableitung ist
+\begin{align*}
+c'(t) =  \begin{pmatrix} (r \cos(t))' \\  (r\sin(t))' \\  0 \end{pmatrix} = \begin{pmatrix} -r \sin(t) \\ r \cos(t) \\  0 \end{pmatrix} \;.
+\end{align*} 
+\end{Beispiel}
+
+\begin{Beispiel}
+Die Kurve 
+$c :  \mathbb{R}   \to  \mathbb{R}^3$, $c(t) :=  \begin{pmatrix} \cos(t) \\  \sin(t) \\  t \end{pmatrix}$
+beschreibt eine sogenannte Helix. Die Ableitung ist
+\begin{align*}
+c'(t) =  \begin{pmatrix} \cos'(t) \\  \sin'(t) \\  t'  \end{pmatrix} = \begin{pmatrix} -\sin(t) \\  \cos(t) \\  1 \end{pmatrix} \;.
+\end{align*} 
+\end{Beispiel}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45]{images/Helix.png}
+    \caption{Eine Helix. Quelle:Wikipedia}
+    \label{fig:helix}
+\end{figure}
+
+\begin{Definition}
+Ist $c: I \subset \mathbb{R} \to \mathbb{R}^3$ eine stückweise differenzierbare Kurve, so heißt
+\begin{align*}
+l(c) := \int_{I} ||c'(t)|| dt
+\end{align*}
+ihre Länge.
+\end{Definition}
+
+
+\begin{Definition}
+Ein Fläche ist   eine injektive Abbildung
+\begin{align*}
+s: U \subset \mathbb{R}^2 \to \mathbb{R}^3 \\
+s(u,v) := \begin{pmatrix} x(u,v) \\ y(u,v) \\ z(u,v) \end{pmatrix} 
+\end{align*} 
+bei der die Abbildungen $x, y, z : U \subset \mathbb{R}^2 \to \mathbb{R}$ stetig sind. Sie heißt differenzierbar, falls die partiellen Ableitungen
+\begin{align*}
+\frac{\partial}{\partial u} s(u,v) = \begin{pmatrix}  \frac{\partial}{\partial u} x(u,v) \\  \frac{\partial}{\partial u} y(u,v) \\  \frac{\partial}{\partial u} z(u,v) \end{pmatrix}
+\end{align*}
+und 
+\begin{align*}
+\frac{\partial}{\partial v} s(u,v) =  \begin{pmatrix} \frac{\partial}{\partial v} x(u,v) \\ \frac{\partial}{\partial v} y(u,v) \\ \frac{\partial}{\partial v} z(u,v) \end{pmatrix}
+\end{align*}
+existieren. Die Ebene 
+\begin{align*}
+T_s(u,v) :=  \{ s(u,v) + \lambda \cdot \frac{\partial}{\partial u} s(u,v) + \mu \cdot \frac{\partial}{\partial v} \; | \; \lambda, \mu \in \mathbb{R} \}
+\end{align*}
+heißt Tangentialebene am Punkt $(u,v)$ und  der Vektor 
+\begin{align*}
+n (u,v):= \frac{\partial}{\partial u} s(u,v) \times \frac{\partial}{\partial v} s(u,v) \; ,
+\end{align*}
+welcher Senkrecht auf dieser Ebene steht,  die Normale.
+\end{Definition}
+
+\begin{Definition}
+Ist 
+\begin{align*}
+s: U \subset \mathbb{R}^2 \to \mathbb{R}^3 \\
+s(u,v) := \begin{pmatrix} x(u,v) \\ y(u,v) \\ z(u,v) \end{pmatrix} 
+\end{align*} 
+eine Fläche und $S:= s(U)$ die von Ihr erzeugte Oberfläche, so definiert man  das OberflächenIntegral
+\begin{align*}
+\int_S d \omega:= \int_U ||n(u,v)|| \cdot dU \;.
+\end{align*} 
+Man nennt $d \omega$ beziehungsweise $ ||n(u,v)||$ das infinitessimale Flächenelement.
+Ist $f: S \to \mathbb{R}$ eine Funktion, so definiert man analog
+\begin{align*}
+\int_S f d \omega:= \int_U f(s(u,v)) \cdot ||n(u,v)|| \cdot dU \;.
+\end{align*} 
+\end{Definition}
+
+\begin{Satz}
+Ist $U = U_1 \times U_2 \in \mathbb{R}^2$ und $f: U \to \mathbb{R}$ eine integrierbare Funktion, so gilt
+\begin{align*}
+\int_U f dU = \int_{U_1} \int_{U_2} f  dU_2 dU_1 \;.
+\end{align*} 
+\end{Satz}
+
+\begin{Beispiel}
+Die  Sphäre $S^2 \subset \mathbb{R}^3$ ist definiert durch 
+\begin{align*}
+& s:  [0, \pi) \times  [0, 2 \pi)  \to \mathbb{R}^3 \\
+ & s(u,v) :=  
+ \begin{pmatrix}  \sin(u) \cos(v) \\   \sin(u) \sin(v) \\   \cos(u)  \end{pmatrix}
+\end{align*} 
+Das Volumen berechnet sich mit
+\begin{align*}
+\frac{\partial}{\partial u} s(u,v) =  \begin{pmatrix}  \cos(u) \cos(v) \\   \cos(u) \sin(v) \\   -\sin(u)  \end{pmatrix} \\
+\frac{\partial}{\partial v} s(u,v) =  \begin{pmatrix}  -\sin(u) \sin(v) \\   \sin(u) \cos(v) \\   0  \end{pmatrix} \\
+||\frac{\partial}{\partial u} s(u,v) \times \frac{\partial}{\partial v} s(u,v) || = sin(u)
+\end{align*} 
+zu
+\begin{align*}
+\int_{S^2} d\omega  = \int_{[0, \pi) \times  [0, 2 \pi) } sin(u) d(u \times v) =   \int_{[0, 2 \pi) }   \int_{[0, \pi) } sin(u) du dv = 4 \pi
+\end{align*} 
+\end{Beispiel}
+
+
+\subsection{Wahrscheinlichkeitstheorie und Monte Carlo Integration}  
+\begin{Definition}
+Ein reller Wahrscheinlichkeitsraum ist ein Tupel $(\Omega, \rho)$ bestehend aus
+\begin{itemize}
+\item Einer Menge $\rho \subset \mathbb{R}^n$ deren Teilmengen Ereignisse genannt werden.
+\item Eine Funktion $\mathbb{P} : \Omega \to \mathbb{R}$ mit $\int_{\omega} \rho(\omega) d\omega = 1$ welche auch Wahrscheinlichkeitsdichte genannt wird.
+\end{itemize}
+Eine Abbildung $X: \Omega \to \mathbb{R}$ wird Zufallsvariable genannt.
+\end{Definition}
+
+
+\begin{Definition}
+Ist $X: \Omega \to \mathbb{R}$ eine  Zufallsvariable, dann heißt
+\begin{align}
+\mathbb{E}[X] := \int_{\Omega} X(\omega) \cdot \rho(\omega) d\omega 
+\end{align}
+Erwartungswert.
+\end{Definition}
+
+
+\begin{Satz}[(Schwaches) Gesetzt der großen Zahlen]
+Ist $X: \Omega \to \mathbb{R}$ eine  Zufallsvariable mit Wahrscheinlichkeitsdichte $\rho: \Omega \to [0,1]$ und $\{ \omega_1, \cdots, \omega_N \}$ eine Stichprobe für $\rho$, so gilt:
+\begin{align}
+\frac{1}{N} \sum_{i= 0}^{N} X(\omega_i) \xrightarrow{ N \to \infty } \mathbb{E}[X] \text{ (in Wahrscheinlichkeit)}
+\end{align}
+\end{Satz}
+
+
+\begin{Satz}
+Ist $f: S \subset \Omega \to \mathbb{R}$ eine Funktion, so gilt für eine beliebige Wahrscheinlichkeitsdichte  $\rho: \Omega \to [0,1]$ und eine Stichprobe 
+ $\{ \omega_1, \cdots, \omega_N \}$
+\begin{align}
+\frac{1}{N} \sum_{i= 0}^{N}  \frac{f(\omega_i)}{\rho(\omega_i)} \xrightarrow{ N \to \infty } \int_{\Omega} f(\omega) d\omega \text{ (in Wahrscheinlichkeit)} \; .
+\end{align}
+\end{Satz}
+
+\subsubsection{Markov Chain Monte Carlo}
+
+\begin{Definition}{Markov Kette}
+\end{Definition}
+
+\subsubsection{Metropolis Hastings Algorithmus}
+
+
