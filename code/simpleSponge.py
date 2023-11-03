@@ -18,8 +18,5 @@ for x in range(0,resX+1):
             aSphere = cq.Workplane('XY').sphere(random.random()/2 + 0.1).translate(translation)
             spheres.add(aSphere)
 sponge = sponge.cut(spheres)
-#result = cq.Workplane().box(1,1,1).faces().edges().fillet(0.1)
 cq.exporters.export(sponge, "simpleSponge.step")
-#cq.exporters.export(result, "nippledsphere.stl",  tolerance= 0.01, angularTolerance = 0.1)
-#cq.exporters.export(sponge, "simpleSponge.stl")
-#cq.exporters.export(result.section(),'result.dxf')
+
