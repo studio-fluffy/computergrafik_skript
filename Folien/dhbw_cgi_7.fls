@@ -1438,11 +1438,15 @@ INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmss12.tfm
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmss8.tfm
 INPUT /usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmss9.tfm
+INPUT ./images/Gradient.png
+INPUT images/Gradient.png
+INPUT ./images/Gradient.png
+INPUT ./images/Gradient.png
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmss10.tfm
 INPUT ./images/499px-Colored_neural_network.png
 INPUT images/499px-Colored_neural_network.png
 INPUT ./images/499px-Colored_neural_network.png
 INPUT ./images/499px-Colored_neural_network.png
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmss10.tfm
 INPUT ./images/500px-NeuronModel_deutsch.png
 INPUT images/500px-NeuronModel_deutsch.png
 INPUT ./images/500px-NeuronModel_deutsch.png

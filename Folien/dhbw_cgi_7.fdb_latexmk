@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1701358733 "/Users/johannesriesterer/Documents/code/computergrafik_skript/Folien/dhbw_cgi_7.tex" "dhbw_cgi_7.pdf" "dhbw_cgi_7" 1701358736 0
-  "/Users/johannesriesterer/Documents/code/computergrafik_skript/Folien/dhbw_cgi_7.tex" 1701358733 8937 d41522c1c6f04300dee367624f382270 ""
+["pdflatex"] 1702041141 "/Users/johannesriesterer/Documents/code/computergrafik_skript/Folien/dhbw_cgi_7.tex" "dhbw_cgi_7.pdf" "dhbw_cgi_7" 1702041144 0
+  "/Users/johannesriesterer/Documents/code/computergrafik_skript/Folien/dhbw_cgi_7.tex" 1702041139 9533 bcca594455200f374c751e5d8f48b9bc ""
   "/usr/local/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -243,13 +243,14 @@
   "/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1698836375 4623355 b8cad38412faebe1ce5b780a45db67bd ""
   "/usr/local/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1698836342 7883462 8a4d061ad2ccf4b7ea70dd63c461eb78 ""
   "/usr/local/texlive/2023/texmf.cnf" 1678822455 577 1b2b1af17af2508fb20dd85783af4050 ""
-  "dhbw_cgi_7.aux" 1701358736 3017 da6c7c6a0c5495c6ff2278499e58d0a9 "pdflatex"
-  "dhbw_cgi_7.nav" 1701358736 1760 62fc699ff6d7a2b0f5019aeec641118f "pdflatex"
-  "dhbw_cgi_7.out" 1701358734 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "dhbw_cgi_7.tex" 1701358733 8937 d41522c1c6f04300dee367624f382270 ""
+  "dhbw_cgi_7.aux" 1702041144 3146 6007981bf07cd22f593050d0ea982625 "pdflatex"
+  "dhbw_cgi_7.nav" 1702041144 1853 6e93c08eb130aec94d87897032b5aaf5 "pdflatex"
+  "dhbw_cgi_7.out" 1702041142 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "dhbw_cgi_7.tex" 1702041139 9533 bcca594455200f374c751e5d8f48b9bc ""
   "images/499px-Colored_neural_network.png" 1698834502 56551 97ff8c4c214c327da4e87dfc47a4573c ""
   "images/500px-NeuronModel_deutsch.png" 1698834502 17272 a22fdf870502b7ee28a0f3fbdc5c6e75 ""
   "images/Contours-and-relief.jpg" 1698834502 145601 350997f1be1d16f255a38a849ec7d7a1 ""
+  "images/Gradient.png" 1698834502 59255 e4b064db10e0de7c7761bc03e6ab4e0c ""
   "images/Gradient_descent.png" 1698834502 37890 321c0684f9d84a3c717e1656b461a343 ""
   "images/ad.png" 1698834502 72454 10e469a3d35f6f064023573de90f05e2 ""
   "images/autoencoder.png" 1701338790 51293 5048c1b1321a485361b4c20625e6bdfd ""
