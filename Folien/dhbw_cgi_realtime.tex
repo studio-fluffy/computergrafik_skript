@@ -51,13 +51,25 @@
 \framesubtitle{}
     \begin{block}{Echzeit Darstellung}
 Standard: $60$ Frames pro Sekunde bei einer Bildschirmauflösung von $4K=3840 \times 2160$ Pixel.  
-D.h. $497.664.000$ Farbwerte müssen pro Sekunde berechnet und an das Ausgebegerät
+D.h. $497.664.000$ Farbwerte müssen pro Sekunde berechnet und an das Ausgabegerät
 geschickt werden. 
 Kombination von Soft- und Hardware nötig.
 \end{block}
-\includegraphics[scale=0.14]{images/Shaderday_Intro/Shaderday_Intro_004} \\
+\begin{table}[h]
+    \centering
+    \tiny % Schriftgröße ändern
+    \begin{tabular}{|l|l|l|}
+    \hline
+    \textbf{GPU-Klasse} & \textbf{FP32-Leistung} & \textbf{FP64-Leistung} \\ \hline
+    \textbf{Einsteiger- / Mittelklasse} & 2 - 10 TFLOPS & 0,1 - 1 TFLOPS \\ \hline
+    \textbf{High-End-Gaming} & 10 - 25 TFLOPS & 0,5 - 2 TFLOPS \\ \hline
+    \textbf{Workstation- / AI-GPUs} & 20 - 40 TFLOPS & 5 - 20 TFLOPS \\ \hline
+    \textbf{Spezialisierte Hochleistung} & Mehrere 100 TFLOPS & Mehrere 20+ TFLOPS \\ \hline
+    \end{tabular}
+    \end{table}
 
 \end{frame}
+
 
 
 
@@ -77,6 +89,13 @@ Kombination von Soft- und Hardware nötig.
   \end{frame}
 
 
+
+\begin{frame}
+    \frametitle{Computergrafik}
+\framesubtitle{}
+
+\includegraphics[scale=0.16]{images/Shaderday_Intro/Shaderday_Intro_004} \\
+\end{frame}
 
 \begin{frame}
     \frametitle{Computergrafik}
