@@ -1432,6 +1432,7 @@ INPUT dhbw_cgi_realtime.nav
 INPUT dhbw_cgi_realtime.nav
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmssbx10.tfm
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmss12.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmss9.tfm
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmss8.tfm
 INPUT /usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmss8.tfm
@@ -1467,6 +1468,12 @@ INPUT ./images/shader.png
 INPUT images/shader.png
 INPUT ./images/shader.png
 INPUT ./images/shader.png
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmssbx10.tfm
+INPUT ./images/Zoopraxiscope.jpg
+INPUT ./images/Zoopraxiscope.jpg
+INPUT images/Zoopraxiscope.jpg
+INPUT ./images/Zoopraxiscope.jpg
+INPUT ./images/Zoopraxiscope.jpg
 OUTPUT dhbw_cgi_realtime.nav
 OUTPUT dhbw_cgi_realtime.toc
 OUTPUT dhbw_cgi_realtime.snm
@@ -1477,6 +1484,7 @@ INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.p
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
