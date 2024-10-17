@@ -1,0 +1,14 @@
+\frametitle{Code des Game Loops}
+    \begin{verbatim}
+    function gameLoop() {
+        window.requestAnimationFrame(gameLoop);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        d = new Date();
+        var currentTime = d.getTime();
+        var dt = currentTime - prevTime;
+        anim.update(dt);
+        anim.draw(ctx);
+        prevTime = currentTime;
+    }
+    \end{verbatim}
