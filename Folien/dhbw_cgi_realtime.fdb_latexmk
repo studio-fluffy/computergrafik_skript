@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1729179319 "/Users/johannesriesterer/Documents/code/computergrafik_skript/Folien/dhbw_cgi_realtime.tex" "dhbw_cgi_realtime.pdf" "dhbw_cgi_realtime" 1729179322 0
-  "/Users/johannesriesterer/Documents/code/computergrafik_skript/Folien/dhbw_cgi_realtime.tex" 1729179319 15061 63a34e094d02d14180a0eefbcff67610 ""
+["pdflatex"] 1729250069 "/Users/johannesriesterer/Documents/code/computergrafik_skript/Folien/dhbw_cgi_realtime.tex" "dhbw_cgi_realtime.pdf" "dhbw_cgi_realtime" 1729250076 0
+  "/Users/johannesriesterer/Documents/code/computergrafik_skript/Folien/dhbw_cgi_realtime.tex" 1729250075 15062 12cc1055110aa1eaf6d5889f75611535 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -244,11 +244,11 @@
   "/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1698836375 4623355 b8cad38412faebe1ce5b780a45db67bd ""
   "/usr/local/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1698836342 7883462 8a4d061ad2ccf4b7ea70dd63c461eb78 ""
   "/usr/local/texlive/2023/texmf.cnf" 1678822455 577 1b2b1af17af2508fb20dd85783af4050 ""
-  "dhbw_cgi_realtime.aux" 1729179321 4694 5c28baeab797217e88d7d55e505f0cfd "pdflatex"
-  "dhbw_cgi_realtime.nav" 1729179321 2969 5734b160ef74b140b37e35c19980d54f "pdflatex"
-  "dhbw_cgi_realtime.out" 1729179320 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "dhbw_cgi_realtime.tex" 1729179319 15061 63a34e094d02d14180a0eefbcff67610 ""
-  "dhbw_cgi_realtime.vrb" 1729179321 397 a8fe40926ea1a855e93c82e9294ea322 "pdflatex"
+  "dhbw_cgi_realtime.aux" 1729250076 4694 5c28baeab797217e88d7d55e505f0cfd "pdflatex"
+  "dhbw_cgi_realtime.nav" 1729250076 2969 5734b160ef74b140b37e35c19980d54f "pdflatex"
+  "dhbw_cgi_realtime.out" 1729250072 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "dhbw_cgi_realtime.tex" 1729250075 15062 12cc1055110aa1eaf6d5889f75611535 ""
+  "dhbw_cgi_realtime.vrb" 1729250076 397 a8fe40926ea1a855e93c82e9294ea322 "pdflatex"
   "images/Shaderday_Intro/Shaderday_Intro_001.jpeg" 1698764054 876131 37c2ba451aa2a591d5d04515c179398e ""
   "images/Shaderday_Intro/Shaderday_Intro_004.jpeg" 1698764054 813708 247f66bbd6bda6b0f9e936542e19065d ""
   "images/Shaderday_Intro/Shaderday_Intro_007.jpeg" 1698764054 202131 89e84c6636ff7ab251bed01960db2f8d ""
