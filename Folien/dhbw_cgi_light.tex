@@ -96,7 +96,15 @@ absolute physikalische Größe, sondern ein empfundener Sinnesreiz. Beispiel: Be
 \end{block}
 \end{frame}
 
+\begin{frame}
+    \frametitle{Lichtmodelle}
+\framesubtitle{}
 
+    \begin{block}{Wahrnehmung}
+\href{https://de.wikipedia.org/wiki/Optische_T\%C3\%A4uschung
+}{Mehr optische Täuschungen}
+\end{block}
+\end{frame}
 
 
 
@@ -105,6 +113,8 @@ absolute physikalische Größe, sondern ein empfundener Sinnesreiz. Beispiel: Be
 \framesubtitle{}
 \begin{center}
 \includegraphics[scale=0.9]{images/Fotodiode}
+\includegraphics[scale=0.2]{images/Photoelectric_effect}
+
 \end{center}
     \begin{block}{Photodioden}
 Photodioden werden aus Elementhalbleitern hergestellt.
@@ -124,7 +134,6 @@ In der Raumladungszone driften die Ladungsträger schnell entgegen der Diffusion
 \begin{center}
 \includegraphics[scale=0.1]{images/photodiode_strom}
 \end{center}
-
 \end{frame}
 
 
@@ -251,18 +260,30 @@ L(x, n):= \lim_{B -> x} L(B)
  \end{align*}
 bei dem die Fläche $B$  zu einem Punkt $x$ zusammengezogen wird.  Die Strahlungsleistung aus einer Richtung $n$  am Punkt $x$ berechnet sich demnach durch $I(x, n) = L(x, n) \cdot \cos(\theta)$, was auch als Lambertsches Cosinusgesetz bezeichnet wird.
 \end{block}
+
 \end{frame}
  
+
 
 \begin{frame}
     \frametitle{Photometrie}
 \framesubtitle{}
-\begin{block}{Strahlungsleistung}
+  \begin{center}
 
-Die Strahlungsleistung $\phi = \frac{d Q}{dt}$ ist die von einem Photonenstrom übertragenen Energie $Q$ pro Zeit. 
-%Für monochromes Licht mit der Frequenz $f$ und Teilchenstrom $ \frac{d N}{dt} $ ergibt sich mit obigen Überlegungen $\phi = h \cdot  \frac{d N}{dt}  \cdot f$.
+    \includegraphics[width=0.45\textwidth]{images/Fotometrisches_Grundgesetz_Schema.png}
+\end{center}
+
+
+\begin{block}{Photometrisches Grundgesetz}
+
+Die Strahlungsleistung $\phi:= \frac{ \partial Q}{\partial t}$, die von einer abstrahlenden Fläche $A_2$  auf eine Fläche $A_1$ übertragen wird, berechnet sich durch
+\begin{align}
+\phi = \int_{A_1} \int_{\pi_s(A_2)} L(x, \omega)\cdot \cos(\beta_1) d\omega  dA_1   \; ,
+\end{align}
+wobei $\beta_1$ der Winkel zwischen der Flächennormale am Punkt $x$ und der Richtung $\omega$ ist und $\pi_s(A_2)$ das sphärische Bild von $A_2$ ist.
 \end{block}
 \end{frame}
+
 
 
 
@@ -353,28 +374,6 @@ Ist $U = U_1 \times U_2 \in \mathbb{R}^2$ und $f: U \to \mathbb{R}$ eine integri
 
 \end{block}
 \end{frame}
-
-\begin{frame}
-    \frametitle{Photometrie}
-\framesubtitle{}
-  \begin{center}
-
-    \includegraphics[width=0.45\textwidth]{images/Fotometrisches_Grundgesetz_Schema.png}
-\end{center}
-
-
-\begin{block}{Photometrisches Grundgesetz}
-
-Die Strahlungsleistung $\phi:= \frac{ \partial Q}{\partial t}$, die von einer abstrahlenden Fläche $A_2$  auf eine Fläche $A_1$ übertragen wird, berechnet sich durch
-\begin{align}
-\phi = \int_{A_1} \int_{\pi_s(A_2)} L(x, \omega)\cdot \cos(\beta_1) d\omega  dA_1   \; ,
-\end{align}
-wobei $\beta_1$ der Winkel zwischen der Flächennormale am Punkt $x$ und der Richtung $\omega$ ist und $\pi_s(A_2)$ das sphärische Bild von $A_2$ ist.
-\end{block}
-\end{frame}
-
-
-
 
 \begin{frame}
     \frametitle{Photometrie}
