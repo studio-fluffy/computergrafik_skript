@@ -1490,11 +1490,6 @@ INPUT ./images/hsvc.png
 INPUT images/hsvc.png
 INPUT ./images/hsvc.png
 INPUT ./images/hsvc.png
-INPUT ./images/Fotometrisches_Grundgesetz_Schema.png
-INPUT ./images/Fotometrisches_Grundgesetz_Schema.png
-INPUT images/Fotometrisches_Grundgesetz_Schema.png
-INPUT ./images/Fotometrisches_Grundgesetz_Schema.png
-INPUT ./images/Fotometrisches_Grundgesetz_Schema.png
 INPUT ./images/Partikelstrom.png
 INPUT ./images/Partikelstrom.png
 INPUT images/Partikelstrom.png
@@ -1508,6 +1503,7 @@ INPUT ./images/Strahldichte.png
 INPUT ./images/Fotometrisches_Grundgesetz_Schema.png
 INPUT ./images/Fotometrisches_Grundgesetz_Schema.png
 INPUT images/Fotometrisches_Grundgesetz_Schema.png
+INPUT ./images/Fotometrisches_Grundgesetz_Schema.png
 INPUT ./images/Fotometrisches_Grundgesetz_Schema.png
 INPUT ./images/solidangle.png
 INPUT images/solidangle.png
