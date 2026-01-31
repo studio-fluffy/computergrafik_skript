@@ -1,0 +1,170 @@
+\documentclass{beamer}
+\usetheme{Warsaw}
+
+\usepackage[utf8]{inputenc}
+\usepackage{fancybox}
+\usepackage{multimedia} 
+\usepackage{subfig}
+\usepackage{amsmath}
+
+\usepackage[all]{xy}
+\begin{document}
+
+
+\title[Computergrafik] % (optional, only for long titles)
+{Computergrafik
+
+\includegraphics[scale=0.36]{images/cover}
+}
+\subtitle{}
+\author[Dr. Johannes Riesterer] % (optional, for multiple authors)
+{Dr.  rer. nat. Johannes Riesterer}
+
+\date[KPT 2004] % (optional)
+{}
+
+\subject{Computergrafik}
+
+
+
+\begin{frame}
+    \frametitle{Computergrafik}
+\framesubtitle{Echzeit Darstellung}
+    \begin{block}{Grafikprozessor (GPU)}
+        Ein Grafikprozessor (Graphics Processing Unit, GPU) ist eine spezialisierte elektronische Schaltung, die entwickelt wurde, um die Berechnung und Darstellung von Bildern und Grafiken auf einem Computerbildschirm zu beschleunigen. 
+        GPUs sind besonders gut geeignet für parallele Verarbeitung großer Datenmengen, was sie ideal für grafikintensive Anwendungen wie Videospiele, 3D-Modellierung und wissenschaftliche Simulationen macht.
+    \end{block}
+
+    \begin{block}{Leistungsfähigkeit von GPUs}
+        Die Leistungsfähigkeit von GPUs wird oft in Teraflops (TFLOPS) gemessen, was die Anzahl der Billionen Gleitkommaoperationen pro Sekunde angibt, die sie ausführen können. Moderne GPUs können je nach Modell und Anwendungsbereich unterschiedliche Leistungsstufen erreichen.
+    \end{block}
+\begin{table}[h]
+    \centering
+    \tiny % Schriftgröße ändern
+    \begin{tabular}{|l|l|l|}
+    \hline
+    \textbf{GPU-Klasse} & \textbf{FP32-Leistung} & \textbf{FP64-Leistung} \\ \hline
+    \textbf{Einsteiger- / Mittelklasse} & 2 - 10 TFLOPS & 0,1 - 1 TFLOPS \\ \hline
+    \textbf{High-End-Gaming} & 10 - 20 TFLOPS & 1 - 5 TFLOPS \\ \hline
+    \textbf{Workstation- / AI-GPUs} & 20 - 100 TFLOPS & 5 - 20 TFLOPS \\ \hline
+    \textbf{Spezialisierte Hochleistung} & Mehrere 100 TFLOPS & Mehrere 20+ TFLOPS \\ \hline
+    \end{tabular}
+    \end{table}
+
+\end{frame}
+
+
+
+
+\begin{frame}{Aufbau und Funktionsweise einer GPU}
+    \begin{itemize}
+      \item \textbf{Architektur:} Viele einfache Rechenkerne in \textit{Streaming Multiprocessors (SM)}, optimiert für parallele Berechnung.
+      \item \textbf{Speicherhierarchie:}
+      \begin{itemize}
+        \item \textit{Global Memory (VRAM)}: Großer, langsamer Speicher für die gesamte GPU.
+        \item \textit{Shared Memory}: Schneller Zwischenspeicher pro SM.
+        \item \textit{Register}: Klein, extrem schnell, lokal pro Kern.
+      \end{itemize}
+      \item \textbf{SIMD-Prinzip:} Gleiche Operation auf mehrere Daten gleichzeitig (Single Instruction, Multiple Data).
+      \item \textbf{Thread-Modell:} Threads in \textit{Thread-Blocks} organisiert, diese in einem \textit{Grid}.
+      \item \textbf{Spezialisierte Hardware:} Rasterisierung, Texturierung und Shading für Grafikoperationen.
+    \end{itemize}
+  \end{frame}
+
+
+
+\begin{frame}
+    \frametitle{Computergrafik}
+\framesubtitle{}
+
+\includegraphics[scale=0.16]{images/Shaderday_Intro/Shaderday_Intro_004} \\
+\end{frame}
+
+\begin{frame}
+    \frametitle{Computergrafik}
+\framesubtitle{}
+
+\includegraphics[scale=0.15]{images/Shaderday_Intro/Shaderday_Intro_007}
+
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Computergrafik}
+\framesubtitle{}
+
+\includegraphics[scale=0.15]{images/Shaderday_Intro/Shaderday_Intro_001} 
+\end{frame}
+
+
+
+  
+\begin{frame}
+    \frametitle{ Shaderprogramm}
+\framesubtitle{}
+\begin{center}
+\includegraphics[scale=0.26]{images/cgpipeline_grob}
+\\
+\includegraphics[scale=0.20]{images/Zeichnung_Shaderpipeline}
+
+\end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{OpenGL Pipeline}
+\framesubtitle{}
+    \begin{block}{}
+\begin{center}
+\includegraphics[scale=0.56]{images/shader}
+\end{center}
+\end{block}
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{HTML-Grundstruktur}
+    \begin{block}{Beispielprogramm minimal\_fragmentshader.html}
+        Beispielrogramm zur Darstellung eines grünen Dreiecks in WebGL.
+        Vergleiche dazu das Programm  minimal\_fragmentshader.html
+    \end{block}
+    
+    \begin{itemize}
+        \item Der Code beginnt mit einer einfachen HTML-Struktur.
+        \item Das \texttt{<canvas>} Element wird verwendet, um den Zeichenbereich für WebGL zu definieren.
+        \item Zwei \texttt{<script>} Tags enthalten den Vertex- und Fragment-Shader, die die Zeichenoperationen steuern.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Vertex Shader}
+    \begin{itemize}
+        \item Der Vertex-Shader bestimmt die Position der Eckpunkte auf der Leinwand.
+        \item \texttt{gl\_Position} legt die Position jedes Vertex im Raum fest.
+    \end{itemize}
+    \begin{verbatim}
+    <script id="2d-vertex-shader" type="x-shader/x-vertex">
+        attribute vec2 a_position;
+        void main() {
+            gl_Position = vec4(a_position.x, a_position.y, 0.0, 1.0);
+        }
+    </script>
+    \end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Fragment Shader}
+    \begin{itemize}
+        \item Der Fragment-Shader legt die Farbe der Pixel fest, die die Dreiecke füllen.
+        \item In diesem Fall wird die Farbe auf Grün gesetzt: \texttt{vec4(0.0, 1.0, 0.0, 1.0)}.
+    \end{itemize}
+    \begin{verbatim}
+    <script id="2d-fragment-shader" type="x-shader/x-fragment">
+        precision mediump float;
+        void main() {
+            gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0);
+        }
+    </script>
+    \end{verbatim}
+\end{frame}
+
+\end{document}
