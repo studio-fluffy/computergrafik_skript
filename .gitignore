@@ -1,10 +1,15 @@
 # pdfLaTeX
 *.aux
+*.fdb_latexmk
+*.fls
 *.log
 *.nav
+*.pdfsync
 *.out
 *.snm
+*.synctex
 *.toc
+*.vrb
 OtherImages
 
 # pdfLaTeX with Bibliography and Nomenclature
