@@ -1,6 +1,7 @@
 \documentclass{beamer}
 \usetheme{Warsaw}
 
+\usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{fancybox}
 \usepackage{multimedia} 
@@ -13,8 +14,6 @@
 
 \title[Computergrafik] % (optional, only for long titles)
 {Computergrafik
-
-\includegraphics[scale=0.36]{images/cover}
 }
 \subtitle{}
 \author[Dr. Johannes Riesterer] % (optional, for multiple authors)
@@ -32,26 +31,54 @@
 \framesubtitle{Echzeit Darstellung}
     \begin{block}{Grafikprozessor (GPU)}
         Ein Grafikprozessor (Graphics Processing Unit, GPU) ist eine spezialisierte elektronische Schaltung, die entwickelt wurde, um die Berechnung und Darstellung von Bildern und Grafiken auf einem Computerbildschirm zu beschleunigen. 
-        GPUs sind besonders gut geeignet für parallele Verarbeitung großer Datenmengen, was sie ideal für grafikintensive Anwendungen wie Videospiele, 3D-Modellierung und wissenschaftliche Simulationen macht.
+        GPUs sind besonders gut geeignet für parallele Verarbeitung großer Datenmengen, 
+        was sie ideal für  Anwendungen wie Videospiele, 3D-Modellierung und maschinelles Lernen macht.
     \end{block}
-
+\end{frame}
+\begin{frame}
+    \frametitle{Computergrafik}
+\framesubtitle{Echzeit Darstellung}
     \begin{block}{Leistungsfähigkeit von GPUs}
-        Die Leistungsfähigkeit von GPUs wird oft in Teraflops (TFLOPS) gemessen, was die Anzahl der Billionen Gleitkommaoperationen pro Sekunde angibt, die sie ausführen können. Moderne GPUs können je nach Modell und Anwendungsbereich unterschiedliche Leistungsstufen erreichen.
+        Die Leistungsfähigkeit von GPUs wird oft in Teraflops (TFLOPS) gemessen, 
+        was die Anzahl der Billionen Gleitkommaoperationen pro Sekunde angibt, 
+        die sie ausführen können. Moderne GPUs können je nach Modell und Anwendungsbereich unterschiedliche Leistungsstufen erreichen.
+        Typische Rechengenauigkeiten sind 32-Bit (FP32) und 16-Bit (FP16) Gleitkommazahlen.
+        Bei 64-Bit (FP64) Gleitkommazahlen ist die Leistung in der Regel deutlich geringer.
     \end{block}
+    
 \begin{table}[h]
     \centering
     \tiny % Schriftgröße ändern
-    \begin{tabular}{|l|l|l|}
+    \begin{tabular}{|l|l|}
     \hline
-    \textbf{GPU-Klasse} & \textbf{FP32-Leistung} & \textbf{FP64-Leistung} \\ \hline
-    \textbf{Einsteiger- / Mittelklasse} & 2 - 10 TFLOPS & 0,1 - 1 TFLOPS \\ \hline
-    \textbf{High-End-Gaming} & 10 - 20 TFLOPS & 1 - 5 TFLOPS \\ \hline
-    \textbf{Workstation- / AI-GPUs} & 20 - 100 TFLOPS & 5 - 20 TFLOPS \\ \hline
-    \textbf{Spezialisierte Hochleistung} & Mehrere 100 TFLOPS & Mehrere 20+ TFLOPS \\ \hline
+    \textbf{GPU-Klasse} & \textbf{Leistung} \\ \hline
+    \textbf{Einsteiger- / Mittelklasse} & 2 - 10 TFLOPS \\ \hline
+    \textbf{High-End-Gaming} & 10 - 100 TFLOPS \\ \hline
+    \textbf{Workstation- / AI-GPUs} & 20 - 1000 TFLOPS \\ \hline
     \end{tabular}
     \end{table}
+\vspace{2mm}
+\href{https://www.gpu-monkey.com/de/benchmark-nvidia_rtx_6000_ada-fp32}{Quelle: GPU Monkey Benchmark NVIDIA RTX 6000 ADA FP32}\\
+\href{https://www.megware.com/fileadmin/user_upload/LandingPage\%20NVIDIA/nvidia-h100-datasheet.pdf}{Quelle: NVIDIA H100 Datasheet}
 
 \end{frame}
+
+
+
+\begin{frame}
+    \frametitle{Computergrafik}
+\framesubtitle{}
+\begin{columns}[c]
+    \column{0.5\textwidth}
+    \centering
+    \includegraphics[width=0.95\linewidth]{images/gpu3.png}
+
+    \column{0.5\textwidth}
+    \centering
+    \includegraphics[width=0.95\linewidth]{images/gpu2.png}
+\end{columns}
+\end{frame}
+
 
 
 
@@ -71,14 +98,240 @@
     \end{itemize}
   \end{frame}
 
-
-
 \begin{frame}
     \frametitle{Computergrafik}
 \framesubtitle{}
 
-\includegraphics[scale=0.16]{images/Shaderday_Intro/Shaderday_Intro_004} \\
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.35]{images/gpu1.png}
+    \caption{\scriptsize Quelle: https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html}
+\end{figure}
 \end{frame}
+
+% ------------------------------------------------------------
+% GPU Programmierung (einfach erklärt)
+% ------------------------------------------------------------
+
+\begin{frame}{GPU-Programmierung: Grundidee}
+\begin{block}{Was macht die GPU schnell?}
+Die GPU ist schnell, wenn sie \textbf{sehr viele ähnliche Rechnungen gleichzeitig} machen kann.
+\begin{itemize}
+  \item Bild: viele Pixel werden parallel berechnet
+  \item Geometrie: viele Vertices werden parallel transformiert
+  \item KI/Mathe: viele Zahlen in großen Matrizen werden parallel verarbeitet
+\end{itemize}
+\end{block}
+
+\begin{block}{Was ist wichtig beim Programmieren?}
+\begin{itemize}
+  \item \textbf{Große Aufgaben auf einmal:} lieber 1 große Rechnung als 1000 kleine
+  \item \textbf{Daten nicht ständig hin- und herschieben:} CPU $\leftrightarrow$ GPU kostet Zeit
+  \item \textbf{Wenig Verzweigungen:} wenn viele Threads unterschiedliche Wege gehen, wird es langsamer
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+\begin{frame}{GPU-Programmierung: Wie nutzt man sie?}
+\begin{block}{Zwei typische Wege}
+\begin{itemize}
+  \item \textbf{Grafik (Shader):} Programme für Vertex/Pixel in OpenGL/Vulkan/Direct3D/Metal/WebGPU
+  \item \textbf{Rechnen (Compute):} GPU als Parallelrechner (Compute Shader oder CUDA/HIP/OpenCL)
+\end{itemize}
+\end{block}
+
+\begin{block}{PyTorch als "GPU-Programmierung ohne viel API-Aufwand"}
+In PyTorch sind viele Tensor-Operationen intern GPU-Kernels.
+Man schreibt Code in Python, aber die GPU rechnet die großen Operationen.
+\end{block}
+\end{frame}
+
+
+% ------------------------------------------------------------
+% PyTorch Beispiel: kurz, lehrreich, passt auf Folien
+% ------------------------------------------------------------
+
+\begin{frame}{Lehrbeispiel (PyTorch): CPU vs GPU}
+\begin{block}{Lernziel}
+\textbf{Die GPU ist besonders stark bei großen Matrixrechnungen.}
+Aber: Man muss die Daten \textbf{auf der GPU lassen}, sonst frisst Kopieren den Vorteil.
+\end{block}
+
+\begin{block}{Idee}
+Wir berechnen einmal eine Matrixmultiplikation auf CPU und einmal auf GPU.
+\end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]{PyTorch Mini-Beispiel: CPU vs GPU (kurz)}
+\scriptsize
+\begin{verbatim}
+import torch, time
+
+def run(n, device):
+    a = torch.randn(n, n, device=device)
+    b = torch.randn(n, n, device=device)
+
+    a @ b                        # warm-up
+    if device == "cuda": torch.cuda.synchronize()
+
+    t = time.time()
+    a @ b
+    if device == "cuda": torch.cuda.synchronize()
+    return time.time() - t
+
+print("CPU:", run(2048, "cpu"))
+print("GPU:", run(8192, "cuda"))
+\end{verbatim}
+
+\begin{block}{Wichtig}
+GPU rechnet "nebenbei". Für faire Messung braucht man \texttt{torch.cuda.synchronize()}.
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Lehrbeispiel: typischer Fehler (zu viel Kopieren)}
+\begin{block}{Problem}
+Wenn man in einer Schleife immer wieder Daten auf die GPU kopiert,
+kann das langsamer sein als CPU-Rechnen.
+\end{block}
+
+\begin{block}{Merksatz}
+\textbf{Einmal kopieren, dann viel rechnen.}
+\end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]{PyTorch: "schlecht" vs. "besser" (passt auf Folie)}
+\scriptsize
+\begin{verbatim}
+# schlecht: in jeder Runde erneut auf die GPU kopieren
+for x in xs:                     # xs liegt auf CPU
+    y = (x.to("cuda") @ x.to("cuda"))
+
+# besser: einmal kopieren, dann rechnen
+xs_gpu = [x.to("cuda") for x in xs]
+for x in xs_gpu:
+    y = (x @ x)
+\end{verbatim}
+
+\begin{block}{Was man daraus lernt}
+Nicht der Rechenkern ist das Problem, sondern oft das "Hin- und Hertragen" der Daten.
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Optional: Warum "Tensor Cores" so große Zahlen liefern}
+\begin{block}{Einfach erklärt}
+Es gibt in vielen GPUs \textbf{Spezial-Einheiten für Matrixrechnung}.
+Die sind extrem schnell, aber sie arbeiten oft mit \textbf{reduzierter Genauigkeit}
+(z.\,B. FP16/BF16/TF32 statt "echtem" FP32).
+\end{block}
+
+\begin{block}{Wichtig für TFLOPS-Angaben}
+\begin{itemize}
+  \item \textbf{FP32 TFLOPS} = klassische Rechenwerke
+  \item \textbf{Tensor TFLOPS} = Spezial-Einheiten für Matrizen (oft viel größer)
+\end{itemize}
+\end{block}
+\end{frame}
+
+% ------------------------------------------------------------
+% Zusatz: Blur / Convolution (PyTorch)
+% ------------------------------------------------------------
+
+\begin{frame}{Lehrbeispiel (PyTorch): Blur als Faltung}
+\begin{block}{Idee}
+Ein Blur kann als \textbf{Faltung (Convolution)} verstanden werden:
+Jeder Pixel wird durch einen gewichteten Mittelwert seiner Nachbarn ersetzt.
+\end{block}
+
+\begin{block}{Warum ist das GPU-freundlich?}
+\begin{itemize}
+  \item Jeder Output-Pixel wird nach dem \textbf{gleichen Rezept} berechnet
+  \item Sehr viele Pixel $\Rightarrow$ viel Parallelität
+  \item Passt gut zur Bildverarbeitung und zu vielen Rendering-Posteffekten
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]{PyTorch: Blur mit conv2d (kurz, GPU-tauglich)}
+\scriptsize
+\begin{verbatim}
+import torch
+import torch.nn.functional as F
+
+dev = "cuda"  # oder "cpu"
+img = torch.rand(1, 1, 1024, 1024, device=dev)     # N,C,H,W
+
+k = torch.ones(1, 1, 9, 9, device=dev) / (9*9)     # Box-Blur Kernel
+out = F.conv2d(img, k, padding=4)                  # gleiche Größe
+
+# out ist das geblurrte Bild (weiter auf GPU nutzbar)
+\end{verbatim}
+
+\begin{block}{Didaktischer Punkt}
+\textbf{Das gleiche Rechenmuster} wird für jeden Pixel parallel ausgeführt.
+Wenn \texttt{img} und \texttt{k} auf der GPU liegen, läuft auch die Faltung auf der GPU.
+\end{block}
+\end{frame}
+
+
+\begin{frame}{CPU-RAM $\rightarrow$ GPU-VRAM: wie lange dauert das grob?}
+\begin{block}{Grobe Größenordnung}
+Die Kopie läuft typischerweise über \textbf{PCI Express (PCIe)}:
+\begin{itemize}
+  \item \textbf{Große, zusammenhängende Datenblöcke:} typischerweise \textbf{Millisekunden pro 100 MB}
+  \item \textbf{Sehr große Transfers (GB-Bereich):} typischerweise \textbf{Zehner-Millisekunden pro GB}
+  \item \textbf{Viele kleine Transfers:} oft \textbf{deutlich langsamer}, weil pro Transfer ein fester Overhead anfällt
+\end{itemize}
+\end{block}
+
+\begin{block}{Warum kleine Kopien besonders schlecht sind}
+PCIe ist paketbasiert und jede Kopie hat Overhead. Deshalb:
+\textbf{lieber wenige große Kopien statt vieler kleiner.}
+\end{block}
+
+\scriptsize
+\href{https://developer.nvidia.com/blog/how-optimize-data-transfers-cuda-cc/}{Quelle: NVIDIA Blog (Transfers bündeln, pinned memory)}\\
+\href{https://forums.developer.nvidia.com/t/question-about-pci-e-transfer-throughput/328759}{Quelle: NVIDIA Forum (realistische PCIe4 x16 Durchsatzwerte, Overhead bei kleinen Transfers)}
+\end{frame}
+
+
+\begin{frame}{Warum das ein Flaschenhals ist}
+\begin{block}{Das Nadelöhr: PCIe vs. GPU-internes Speichertempo}
+\begin{itemize}
+  \item PCIe 4.0 x16 liegt grob bei \textbf{einigen Dutzend GB/s}, PCIe 5.0 x16 bei \textbf{bis zu} \textbf{64 GB/s} (theoretisch).
+  \item Der Speicher \textbf{auf der GPU} (VRAM/HBM) ist dagegen in einer ganz anderen Liga:
+        Datacenter-GPUs erreichen \textbf{bis über 2 TB/s} Speicherbandbreite.
+\end{itemize}
+\end{block}
+
+\begin{block}{Praktische Konsequenz (Merksatz)}
+\textbf{Wenn Daten jeden Frame / jeden Iterationsschritt über PCIe nachgeladen werden müssen,}
+dann bestimmt oft \textbf{der Transfer} die Gesamtgeschwindigkeit.
+Deshalb: \textbf{Daten einmal auf die GPU laden und dort möglichst viel damit machen.}
+\end{block}
+
+\scriptsize
+\href{https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/a100/pdf/nvidia-a100-datasheet-nvidia-us-2188504-web.pdf}{Quelle: NVIDIA A100 Datasheet (GPU Memory Bandwidth $>$ 2 TB/s)}\\
+\href{https://www.computerbase.de/news/mainboards/pci-express-5-0-spezifikation-release.67965/}{Quelle: ComputerBase (PCIe 5.0 x16 $\sim$ 64 GB/s, dual-simplex erklärt)}
+\end{frame}
+
+
+\begin{frame}{Schaubild: warum „pinned“ und „Batching“ helfen}
+\begin{block}{Anschauliches Diagramm (NVIDIA)}
+Das Schaubild zeigt, dass \textbf{page-locked/pinned memory} und \textbf{größere Transfers} die effektive Bandbreite erhöhen.
+\end{block}
+
+\small
+\href{https://developer.nvidia.com/blog/how-optimize-data-transfers-cuda-cc/}{NVIDIA Blog: How to Optimize Data Transfers in CUDA C/C++}
+\end{frame}
+
+
+
 
 \begin{frame}
     \frametitle{Computergrafik}
@@ -118,53 +371,6 @@
 \includegraphics[scale=0.56]{images/shader}
 \end{center}
 \end{block}
-\end{frame}
-
-
-\begin{frame}
-    \frametitle{HTML-Grundstruktur}
-    \begin{block}{Beispielprogramm minimal\_fragmentshader.html}
-        Beispielrogramm zur Darstellung eines grünen Dreiecks in WebGL.
-        Vergleiche dazu das Programm  minimal\_fragmentshader.html
-    \end{block}
-    
-    \begin{itemize}
-        \item Der Code beginnt mit einer einfachen HTML-Struktur.
-        \item Das \texttt{<canvas>} Element wird verwendet, um den Zeichenbereich für WebGL zu definieren.
-        \item Zwei \texttt{<script>} Tags enthalten den Vertex- und Fragment-Shader, die die Zeichenoperationen steuern.
-    \end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-    \frametitle{Vertex Shader}
-    \begin{itemize}
-        \item Der Vertex-Shader bestimmt die Position der Eckpunkte auf der Leinwand.
-        \item \texttt{gl\_Position} legt die Position jedes Vertex im Raum fest.
-    \end{itemize}
-    \begin{verbatim}
-    <script id="2d-vertex-shader" type="x-shader/x-vertex">
-        attribute vec2 a_position;
-        void main() {
-            gl_Position = vec4(a_position.x, a_position.y, 0.0, 1.0);
-        }
-    </script>
-    \end{verbatim}
-\end{frame}
-
-\begin{frame}[fragile]
-    \frametitle{Fragment Shader}
-    \begin{itemize}
-        \item Der Fragment-Shader legt die Farbe der Pixel fest, die die Dreiecke füllen.
-        \item In diesem Fall wird die Farbe auf Grün gesetzt: \texttt{vec4(0.0, 1.0, 0.0, 1.0)}.
-    \end{itemize}
-    \begin{verbatim}
-    <script id="2d-fragment-shader" type="x-shader/x-fragment">
-        precision mediump float;
-        void main() {
-            gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0);
-        }
-    </script>
-    \end{verbatim}
 \end{frame}
 
 \end{document}

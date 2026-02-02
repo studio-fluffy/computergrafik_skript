@@ -55,176 +55,7 @@ D.h. $497.664.000$ Farbwerte müssen pro Sekunde berechnet und an das Ausgabeger
 geschickt werden. 
 Kombination von Soft- und Hardware nötig.
 \end{block}
-\begin{table}[h]
-    \centering
-    \tiny % Schriftgröße ändern
-    \begin{tabular}{|l|l|l|}
-    \hline
-    \textbf{GPU-Klasse} & \textbf{FP32-Leistung} & \textbf{FP64-Leistung} \\ \hline
-    \textbf{Einsteiger- / Mittelklasse} & 2 - 10 TFLOPS & 0,1 - 1 TFLOPS \\ \hline
-    \textbf{High-End-Gaming} & 10 - 20 TFLOPS & 1 - 5 TFLOPS \\ \hline
-    \textbf{Workstation- / AI-GPUs} & 20 - 100 TFLOPS & 5 - 20 TFLOPS \\ \hline
-    \textbf{Spezialisierte Hochleistung} & Mehrere 100 TFLOPS & Mehrere 20+ TFLOPS \\ \hline
-    \end{tabular}
-    \end{table}
 
-\end{frame}
-
-
-
-
-\begin{frame}{Aufbau und Funktionsweise einer GPU}
-    \begin{itemize}
-      \item \textbf{Architektur:} Viele einfache Rechenkerne in \textit{Streaming Multiprocessors (SM)}, optimiert für parallele Berechnung.
-      \item \textbf{Speicherhierarchie:}
-      \begin{itemize}
-        \item \textit{Global Memory (VRAM)}: Großer, langsamer Speicher für die gesamte GPU.
-        \item \textit{Shared Memory}: Schneller Zwischenspeicher pro SM.
-        \item \textit{Register}: Klein, extrem schnell, lokal pro Kern.
-      \end{itemize}
-      \item \textbf{SIMD-Prinzip:} Gleiche Operation auf mehrere Daten gleichzeitig (Single Instruction, Multiple Data).
-      \item \textbf{Thread-Modell:} Threads in \textit{Thread-Blocks} organisiert, diese in einem \textit{Grid}.
-      \item \textbf{Spezialisierte Hardware:} Rasterisierung, Texturierung und Shading für Grafikoperationen.
-    \end{itemize}
-  \end{frame}
-
-
-
-\begin{frame}
-    \frametitle{Computergrafik}
-\framesubtitle{}
-
-\includegraphics[scale=0.16]{images/Shaderday_Intro/Shaderday_Intro_004} \\
-\end{frame}
-
-\begin{frame}
-    \frametitle{Computergrafik}
-\framesubtitle{}
-
-\includegraphics[scale=0.15]{images/Shaderday_Intro/Shaderday_Intro_007}
-
-\end{frame}
-
-
-\begin{frame}
-    \frametitle{Computergrafik}
-\framesubtitle{}
-
-\includegraphics[scale=0.15]{images/Shaderday_Intro/Shaderday_Intro_001} 
-\end{frame}
-
-
-
-  
-\begin{frame}
-    \frametitle{ Shaderprogramm}
-\framesubtitle{}
-\begin{center}
-\includegraphics[scale=0.26]{images/cgpipeline_grob}
-\\
-\includegraphics[scale=0.20]{images/Zeichnung_Shaderpipeline}
-
-\end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{OpenGL Pipeline}
-\framesubtitle{}
-    \begin{block}{}
-\begin{center}
-\includegraphics[scale=0.56]{images/shader}
-\end{center}
-\end{block}
-\end{frame}
-
-
-\begin{frame}
-    \frametitle{HTML-Grundstruktur}
-    \begin{block}{Beispielprogramm minimal\_fragmentshader.html}
-        Beispielrogramm zur Darstellung eines grünen Dreiecks in WebGL.
-        Vergleiche dazu das Programm  minimal\_fragmentshader.html
-    \end{block}
-    
-    \begin{itemize}
-        \item Der Code beginnt mit einer einfachen HTML-Struktur.
-        \item Das \texttt{<canvas>} Element wird verwendet, um den Zeichenbereich für WebGL zu definieren.
-        \item Zwei \texttt{<script>} Tags enthalten den Vertex- und Fragment-Shader, die die Zeichenoperationen steuern.
-    \end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-    \frametitle{Vertex Shader}
-    \begin{itemize}
-        \item Der Vertex-Shader bestimmt die Position der Eckpunkte auf der Leinwand.
-        \item \texttt{gl\_Position} legt die Position jedes Vertex im Raum fest.
-    \end{itemize}
-    \begin{verbatim}
-    <script id="2d-vertex-shader" type="x-shader/x-vertex">
-        attribute vec2 a_position;
-        void main() {
-            gl_Position = vec4(a_position.x, a_position.y, 0.0, 1.0);
-        }
-    </script>
-    \end{verbatim}
-\end{frame}
-
-\begin{frame}[fragile]
-    \frametitle{Fragment Shader}
-    \begin{itemize}
-        \item Der Fragment-Shader legt die Farbe der Pixel fest, die die Dreiecke füllen.
-        \item In diesem Fall wird die Farbe auf Grün gesetzt: \texttt{vec4(0.0, 1.0, 0.0, 1.0)}.
-    \end{itemize}
-    \begin{verbatim}
-    <script id="2d-fragment-shader" type="x-shader/x-fragment">
-        precision mediump float;
-        void main() {
-            gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0);
-        }
-    </script>
-    \end{verbatim}
-\end{frame}
-
-\begin{frame}[fragile]
-    \frametitle{WebGL Initialisierung und Shader-Kompilierung}
-    \begin{itemize}
-        \item Nach dem Laden des Dokuments wird der WebGL-Kontext erstellt.
-        \item Die Shader werden kompiliert und das Programm wird verknüpft.
-    \end{itemize}
-    \begin{verbatim}
-    gl = canvas.getContext("webgl");
-    shaderScript = document.getElementById("2d-vertex-shader");
-    vertexShader = gl.createShader(gl.VERTEX_SHADER);
-    gl.shaderSource(vertexShader, shaderScript.text);
-    gl.compileShader(vertexShader);
-    \end{verbatim}
-\end{frame}
-
-\begin{frame}[fragile]
-    \frametitle{Erstellen und Binden des Buffers}
-    \begin{itemize}
-        \item Ein Buffer wird erstellt, um die Vertex-Daten zu speichern.
-        \item Die Positionen der Eckpunkte des Dreiecks werden in den Buffer geladen.
-    \end{itemize}
-    \begin{verbatim}
-    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-    gl.bufferData(gl.ARRAY_BUFFER, 
-        new Float32Array([
-            -1.0, -1.0,
-            1.0, -1.0,
-            -1.0, 1.0,
-            -1.0, 1.0,
-            1.0, -1.0,
-            1.0, 1.0]), 
-        gl.STATIC_DRAW);
-    \end{verbatim}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Zeichnen des Dreiecks}
-    \begin{itemize}
-        \item Die Vertex-Attribute werden aktiviert und an den Shader übergeben.
-        \item Schließlich wird das Dreieck mit \texttt{gl.drawArrays()} gezeichnet.
-    \end{itemize}
 \end{frame}
 
 
@@ -330,6 +161,100 @@ Kombination von Soft- und Hardware nötig.
         \item Unterstützt einfache Bewegungsanimationen ohne aufwendige Rechenleistung.
     \end{itemize}
 \end{frame}
+
+
+
+
+\begin{frame}
+    \frametitle{HTML-Grundstruktur}
+    \begin{block}{Beispielprogramm minimal\_fragmentshader.html}
+        Beispielrogramm zur Darstellung eines grünen Dreiecks in WebGL.
+        Vergleiche dazu das Programm  minimal\_fragmentshader.html
+    \end{block}
+    
+    \begin{itemize}
+        \item Der Code beginnt mit einer einfachen HTML-Struktur.
+        \item Das \texttt{<canvas>} Element wird verwendet, um den Zeichenbereich für WebGL zu definieren.
+        \item Zwei \texttt{<script>} Tags enthalten den Vertex- und Fragment-Shader, die die Zeichenoperationen steuern.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Vertex Shader}
+    \begin{itemize}
+        \item Der Vertex-Shader bestimmt die Position der Eckpunkte auf der Leinwand.
+        \item \texttt{gl\_Position} legt die Position jedes Vertex im Raum fest.
+    \end{itemize}
+    \begin{verbatim}
+    <script id="2d-vertex-shader" type="x-shader/x-vertex">
+        attribute vec2 a_position;
+        void main() {
+            gl_Position = vec4(a_position.x, a_position.y, 0.0, 1.0);
+        }
+    </script>
+    \end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Fragment Shader}
+    \begin{itemize}
+        \item Der Fragment-Shader legt die Farbe der Pixel fest, die die Dreiecke füllen.
+        \item In diesem Fall wird die Farbe auf Grün gesetzt: \texttt{vec4(0.0, 1.0, 0.0, 1.0)}.
+    \end{itemize}
+    \begin{verbatim}
+    <script id="2d-fragment-shader" type="x-shader/x-fragment">
+        precision mediump float;
+        void main() {
+            gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0);
+        }
+    </script>
+    \end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{WebGL Initialisierung und Shader-Kompilierung}
+    \begin{itemize}
+        \item Nach dem Laden des Dokuments wird der WebGL-Kontext erstellt.
+        \item Die Shader werden kompiliert und das Programm wird verknüpft.
+    \end{itemize}
+    \begin{verbatim}
+    gl = canvas.getContext("webgl");
+    shaderScript = document.getElementById("2d-vertex-shader");
+    vertexShader = gl.createShader(gl.VERTEX_SHADER);
+    gl.shaderSource(vertexShader, shaderScript.text);
+    gl.compileShader(vertexShader);
+    \end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Erstellen und Binden des Buffers}
+    \begin{itemize}
+        \item Ein Buffer wird erstellt, um die Vertex-Daten zu speichern.
+        \item Die Positionen der Eckpunkte des Dreiecks werden in den Buffer geladen.
+    \end{itemize}
+    \begin{verbatim}
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+    gl.bufferData(gl.ARRAY_BUFFER, 
+        new Float32Array([
+            -1.0, -1.0,
+            1.0, -1.0,
+            -1.0, 1.0,
+            -1.0, 1.0,
+            1.0, -1.0,
+            1.0, 1.0]), 
+        gl.STATIC_DRAW);
+    \end{verbatim}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Zeichnen des Dreiecks}
+    \begin{itemize}
+        \item Die Vertex-Attribute werden aktiviert und an den Shader übergeben.
+        \item Schließlich wird das Dreieck mit \texttt{gl.drawArrays()} gezeichnet.
+    \end{itemize}
+\end{frame}
+
+
 
 
 \begin{frame}
