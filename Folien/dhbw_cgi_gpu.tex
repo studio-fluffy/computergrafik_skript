@@ -3,6 +3,7 @@
 
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
 \usepackage{fancybox}
 \usepackage{multimedia} 
 \usepackage{subfig}
@@ -28,7 +29,7 @@
 
 \begin{frame}
     \frametitle{Computergrafik}
-\framesubtitle{Echzeit Darstellung}
+\framesubtitle{Einführung in GPU Computing}
     \begin{block}{Grafikprozessor (GPU)}
         Ein Grafikprozessor (Graphics Processing Unit, GPU) ist eine spezialisierte elektronische Schaltung, die entwickelt wurde, um die Berechnung und Darstellung von Bildern und Grafiken auf einem Computerbildschirm zu beschleunigen. 
         GPUs sind besonders gut geeignet für parallele Verarbeitung großer Datenmengen, 
@@ -37,7 +38,7 @@
 \end{frame}
 \begin{frame}
     \frametitle{Computergrafik}
-\framesubtitle{Echzeit Darstellung}
+\framesubtitle{Einführung in GPU Computing}
     \begin{block}{Leistungsfähigkeit von GPUs}
         Die Leistungsfähigkeit von GPUs wird oft in Teraflops (TFLOPS) gemessen, 
         was die Anzahl der Billionen Gleitkommaoperationen pro Sekunde angibt, 
@@ -67,7 +68,7 @@
 
 \begin{frame}
     \frametitle{Computergrafik}
-\framesubtitle{}
+\framesubtitle{Einführung in GPU Computing}
 \begin{columns}[c]
     \column{0.5\textwidth}
     \centering
@@ -84,6 +85,8 @@
 
 
 \begin{frame}{Aufbau und Funktionsweise einer GPU}
+\frametitle{Computergrafik}
+\framesubtitle{Einführung in GPU Computing}
     \begin{itemize}
       \item \textbf{Architektur:} Viele einfache Rechenkerne in \textit{Streaming Multiprocessors (SM)}, optimiert für parallele Berechnung.
       \item \textbf{Speicherhierarchie:}
@@ -98,9 +101,21 @@
     \end{itemize}
   \end{frame}
 
+\begin{frame}{Was ist eine Shader Unit?}
+\frametitle{Computergrafik}
+\framesubtitle{Einführung in GPU Computing}
+\begin{block}{Shader Unit}
+\begin{itemize}
+    \item Eine \textbf{Shader Unit} ist ein \textbf{ALU-Rechenwerk} (z.\,B. FP32/INT) \textbf{innerhalb eines Streaming Multiprocessors (SM)}.
+    \item Ein \textbf{SM} enthält \textbf{viele Shader Units} plus \textbf{Warp/Thread-Scheduler}, \textbf{Register-Datei} und \textbf{Shared Memory}.
+    \item Viele SMs zusammen bilden den \textbf{GPU-Rechenteil} (neben festen Grafik-Blöcken wie Rasterizer/Textur-Einheiten).
+\end{itemize}
+\end{block}
+\end{frame}
+
 \begin{frame}
     \frametitle{Computergrafik}
-\framesubtitle{}
+\framesubtitle{Einführung in GPU Computing}
 
 \begin{figure}[H]
     \centering
@@ -114,6 +129,8 @@
 % ------------------------------------------------------------
 
 \begin{frame}{GPU-Programmierung: Grundidee}
+\frametitle{Computergrafik}
+\framesubtitle{Einführung in GPU Computing}
 \begin{block}{Was macht die GPU schnell?}
 Die GPU ist schnell, wenn sie \textbf{sehr viele ähnliche Rechnungen gleichzeitig} machen kann.
 \begin{itemize}
@@ -134,6 +151,8 @@ Die GPU ist schnell, wenn sie \textbf{sehr viele ähnliche Rechnungen gleichzeit
 
 
 \begin{frame}{GPU-Programmierung: Wie nutzt man sie?}
+\frametitle{Computergrafik}
+\framesubtitle{Einführung in GPU Computing}
 \begin{block}{Zwei typische Wege}
 \begin{itemize}
   \item \textbf{Grafik (Shader):} Programme für Vertex/Pixel in OpenGL/Vulkan/Direct3D/Metal/WebGPU
@@ -148,138 +167,10 @@ Man schreibt Code in Python, aber die GPU rechnet die großen Operationen.
 \end{frame}
 
 
-% ------------------------------------------------------------
-% PyTorch Beispiel: kurz, lehrreich, passt auf Folien
-% ------------------------------------------------------------
-
-\begin{frame}{Lehrbeispiel (PyTorch): CPU vs GPU}
-\begin{block}{Lernziel}
-\textbf{Die GPU ist besonders stark bei großen Matrixrechnungen.}
-Aber: Man muss die Daten \textbf{auf der GPU lassen}, sonst frisst Kopieren den Vorteil.
-\end{block}
-
-\begin{block}{Idee}
-Wir berechnen einmal eine Matrixmultiplikation auf CPU und einmal auf GPU.
-\end{block}
-\end{frame}
-
-
-\begin{frame}[fragile]{PyTorch Mini-Beispiel: CPU vs GPU (kurz)}
-\scriptsize
-\begin{verbatim}
-import torch, time
-
-def run(n, device):
-    a = torch.randn(n, n, device=device)
-    b = torch.randn(n, n, device=device)
-
-    a @ b                        # warm-up
-    if device == "cuda": torch.cuda.synchronize()
-
-    t = time.time()
-    a @ b
-    if device == "cuda": torch.cuda.synchronize()
-    return time.time() - t
-
-print("CPU:", run(2048, "cpu"))
-print("GPU:", run(8192, "cuda"))
-\end{verbatim}
-
-\begin{block}{Wichtig}
-GPU rechnet "nebenbei". Für faire Messung braucht man \texttt{torch.cuda.synchronize()}.
-\end{block}
-\end{frame}
-
-
-\begin{frame}{Lehrbeispiel: typischer Fehler (zu viel Kopieren)}
-\begin{block}{Problem}
-Wenn man in einer Schleife immer wieder Daten auf die GPU kopiert,
-kann das langsamer sein als CPU-Rechnen.
-\end{block}
-
-\begin{block}{Merksatz}
-\textbf{Einmal kopieren, dann viel rechnen.}
-\end{block}
-\end{frame}
-
-
-\begin{frame}[fragile]{PyTorch: "schlecht" vs. "besser" (passt auf Folie)}
-\scriptsize
-\begin{verbatim}
-# schlecht: in jeder Runde erneut auf die GPU kopieren
-for x in xs:                     # xs liegt auf CPU
-    y = (x.to("cuda") @ x.to("cuda"))
-
-# besser: einmal kopieren, dann rechnen
-xs_gpu = [x.to("cuda") for x in xs]
-for x in xs_gpu:
-    y = (x @ x)
-\end{verbatim}
-
-\begin{block}{Was man daraus lernt}
-Nicht der Rechenkern ist das Problem, sondern oft das "Hin- und Hertragen" der Daten.
-\end{block}
-\end{frame}
-
-
-\begin{frame}{Optional: Warum "Tensor Cores" so große Zahlen liefern}
-\begin{block}{Einfach erklärt}
-Es gibt in vielen GPUs \textbf{Spezial-Einheiten für Matrixrechnung}.
-Die sind extrem schnell, aber sie arbeiten oft mit \textbf{reduzierter Genauigkeit}
-(z.\,B. FP16/BF16/TF32 statt "echtem" FP32).
-\end{block}
-
-\begin{block}{Wichtig für TFLOPS-Angaben}
-\begin{itemize}
-  \item \textbf{FP32 TFLOPS} = klassische Rechenwerke
-  \item \textbf{Tensor TFLOPS} = Spezial-Einheiten für Matrizen (oft viel größer)
-\end{itemize}
-\end{block}
-\end{frame}
-
-% ------------------------------------------------------------
-% Zusatz: Blur / Convolution (PyTorch)
-% ------------------------------------------------------------
-
-\begin{frame}{Lehrbeispiel (PyTorch): Blur als Faltung}
-\begin{block}{Idee}
-Ein Blur kann als \textbf{Faltung (Convolution)} verstanden werden:
-Jeder Pixel wird durch einen gewichteten Mittelwert seiner Nachbarn ersetzt.
-\end{block}
-
-\begin{block}{Warum ist das GPU-freundlich?}
-\begin{itemize}
-  \item Jeder Output-Pixel wird nach dem \textbf{gleichen Rezept} berechnet
-  \item Sehr viele Pixel $\Rightarrow$ viel Parallelität
-  \item Passt gut zur Bildverarbeitung und zu vielen Rendering-Posteffekten
-\end{itemize}
-\end{block}
-\end{frame}
-
-
-\begin{frame}[fragile]{PyTorch: Blur mit conv2d (kurz, GPU-tauglich)}
-\scriptsize
-\begin{verbatim}
-import torch
-import torch.nn.functional as F
-
-dev = "cuda"  # oder "cpu"
-img = torch.rand(1, 1, 1024, 1024, device=dev)     # N,C,H,W
-
-k = torch.ones(1, 1, 9, 9, device=dev) / (9*9)     # Box-Blur Kernel
-out = F.conv2d(img, k, padding=4)                  # gleiche Größe
-
-# out ist das geblurrte Bild (weiter auf GPU nutzbar)
-\end{verbatim}
-
-\begin{block}{Didaktischer Punkt}
-\textbf{Das gleiche Rechenmuster} wird für jeden Pixel parallel ausgeführt.
-Wenn \texttt{img} und \texttt{k} auf der GPU liegen, läuft auch die Faltung auf der GPU.
-\end{block}
-\end{frame}
-
 
 \begin{frame}{CPU-RAM $\rightarrow$ GPU-VRAM: wie lange dauert das grob?}
+\frametitle{Computergrafik}
+\framesubtitle{Einführung in GPU Computing}
 \begin{block}{Grobe Größenordnung}
 Die Kopie läuft typischerweise über \textbf{PCI Express (PCIe)}:
 \begin{itemize}
@@ -301,6 +192,8 @@ PCIe ist paketbasiert und jede Kopie hat Overhead. Deshalb:
 
 
 \begin{frame}{Warum das ein Flaschenhals ist}
+\frametitle{Computergrafik}
+\framesubtitle{Einführung in GPU Computing}
 \begin{block}{Das Nadelöhr: PCIe vs. GPU-internes Speichertempo}
 \begin{itemize}
   \item PCIe 4.0 x16 liegt grob bei \textbf{einigen Dutzend GB/s}, PCIe 5.0 x16 bei \textbf{bis zu} \textbf{64 GB/s} (theoretisch).
@@ -321,21 +214,11 @@ Deshalb: \textbf{Daten einmal auf die GPU laden und dort möglichst viel damit m
 \end{frame}
 
 
-\begin{frame}{Schaubild: warum „pinned“ und „Batching“ helfen}
-\begin{block}{Anschauliches Diagramm (NVIDIA)}
-Das Schaubild zeigt, dass \textbf{page-locked/pinned memory} und \textbf{größere Transfers} die effektive Bandbreite erhöhen.
-\end{block}
-
-\small
-\href{https://developer.nvidia.com/blog/how-optimize-data-transfers-cuda-cc/}{NVIDIA Blog: How to Optimize Data Transfers in CUDA C/C++}
-\end{frame}
-
-
 
 
 \begin{frame}
     \frametitle{Computergrafik}
-\framesubtitle{}
+\framesubtitle{Einführung in GPU Computing}
 
 \includegraphics[scale=0.15]{images/Shaderday_Intro/Shaderday_Intro_007}
 
@@ -344,7 +227,7 @@ Das Schaubild zeigt, dass \textbf{page-locked/pinned memory} und \textbf{größe
 
 \begin{frame}
     \frametitle{Computergrafik}
-\framesubtitle{}
+\framesubtitle{Einführung in GPU Computing}
 
 \includegraphics[scale=0.15]{images/Shaderday_Intro/Shaderday_Intro_001} 
 \end{frame}
@@ -353,8 +236,8 @@ Das Schaubild zeigt, dass \textbf{page-locked/pinned memory} und \textbf{größe
 
   
 \begin{frame}
-    \frametitle{ Shaderprogramm}
-\framesubtitle{}
+    \frametitle{Computergrafik}
+\framesubtitle{Einführung in GPU Computing}
 \begin{center}
 \includegraphics[scale=0.26]{images/cgpipeline_grob}
 \\
@@ -364,12 +247,11 @@ Das Schaubild zeigt, dass \textbf{page-locked/pinned memory} und \textbf{größe
 \end{frame}
 
 \begin{frame}
-    \frametitle{OpenGL Pipeline}
-\framesubtitle{}
-    \begin{block}{}
-\begin{center}
-\includegraphics[scale=0.56]{images/shader}
-\end{center}
+    \frametitle{Computergrafik}
+\framesubtitle{Einführung in GPU Computing}
+
+  \begin{block}{}
+\href{https://www.shadertoy.com/}{https://www.shadertoy.com/}
 \end{block}
 \end{frame}
 
