@@ -14,11 +14,27 @@ and open the template in the editor.
     <canvas id="glcanvas"></canvas>
 
     <script id="2d-vertex-shader" type="x-shader/x-vertex">
+    // -----------------------------------------------------------------------------
+    // Vertex Shader (Pass-Through)
+    // -----------------------------------------------------------------------------
+    // Aufgabe:
+    // 1) Die Eingabe-Positionen (zwei Dreiecke über den ganzen Bildschirm) direkt
+    //    nach Clip Space weitergeben.
+    // 2) Die Zeitvariable "t" an den Fragment-Shader weiterreichen (varying T),
+    //    damit dort eine zeitabhängige Animation erzeugt werden kann.
+    //
+    // Hinweis:
+    // In diesem Beispiel werden keine Matrizen (Model/View/Projection) benutzt,
+    // sondern direkt NDC-/Clip-Koordinaten im Bereich [-1, 1] gezeichnet.
+
 attribute vec2 a_position;
 uniform float t;
 varying float T;
 void main() {
         //  gl_Position = vec4(a_position, 0.0, t);
+      // "t" wird nur weitergereicht, nicht in gl_Position verwendet.
+      // So bleibt die Geometrie statisch, aber der Fragment-Shader kann
+      // das Rauschmuster über die Zeit verändern.
         T = t;
         gl_Position = vec4(a_position, 1.0, 1.0);
 }
@@ -28,12 +44,29 @@ void main() {
 
 <script id="2d-fragment-shader" type="x-shader/x-fragment">
 
+// -----------------------------------------------------------------------------
+// Fragment Shader: Animiertes 2D-Gradient-Noise (Perlin-artig)
+// -----------------------------------------------------------------------------
+// Der Shader demonstriert die klassischen Bausteine von Gradient Noise:
+// - Aufteilung in Gitterzellen
+// - Zufallsgradienten an den 4 Zell-Ecken
+// - Dot-Products zwischen Gradienten und Distanzvektoren
+// - Glättung der lokalen Koordinate (fade function)
+// - Bilineare Interpolation der 4 Beiträge
+//
+// Zusätzlich werden Debug-/Lernvisualisierungen gezeigt:
+// - Gradient-Linien an den Ecken
+// - Ein Mittelpunkt-Kreis pro Zelle
+
 precision mediump float;
 varying float T;
 
 uniform vec2 u_resolution;
 
 vec2 randomGradient(vec2 p) {
+  // Pseudozufälliger 2D-Gradient aus der Gitterposition p.
+  // Der Wert ist deterministisch pro Zelle (bei gleichem p immer gleich),
+  // aber wirkt zufällig verteilt.
   p = p + 0.02;
   float x = dot(p, vec2(123.4, 234.5));
   float y = dot(p, vec2(234.5, 345.6));
@@ -41,7 +74,8 @@ vec2 randomGradient(vec2 p) {
   gradient = sin(gradient);
   gradient = gradient * 43758.5453;
 
-  // part 4.5 - update noise function with time
+  // Zeitabhängige Variation: Der Gradient rotiert/verschiebt sich über T,
+  // dadurch wird das Rauschmuster animiert.
   gradient = sin(gradient + T);
   return gradient;
 
@@ -51,11 +85,15 @@ vec2 randomGradient(vec2 p) {
 
 // inigo quilez - https://iquilezles.org/articles/distfunctions2d/
 float sdfCircle(in vec2 p, in float r) {
+  // Signed Distance Function eines Kreises:
+  // < 0 innerhalb, = 0 auf der Kontur, > 0 außerhalb.
   return length(p) - r;
 }
 
 // inigo quilez - https://iquilezles.org/articles/distfunctions2d/
 float sdfOrientedBox(in vec2 p, in vec2 a, in vec2 b, float th) {
+  // Signed Distance zu einem gedrehten Rechteck-Segment,
+  // hier genutzt um "Linien" von a nach b zu zeichnen (Dicke th).
   float l = length(b - a);
   vec2 d = (b - a) / l;
   vec2 q = (p - (a + b) * 0.5);
@@ -65,98 +103,97 @@ float sdfOrientedBox(in vec2 p, in vec2 a, in vec2 b, float th) {
 }
 
 vec2 cubic(vec2 p) {
+  // Klassische smoothstep-artige Interpolationskurve (C1-stetig).
   return p * p * (3.0 - p * 2.0);
 }
 
 vec2 quintic(vec2 p) {
+  // Perlin-Fade-Funktion (C2-stetig):
+  // f(t) = 6t^5 - 15t^4 + 10t^3
+  // Erzeugt weichere Übergänge als cubic und reduziert sichtbare Kanten.
   return p * p * p * (10.0 + p * (-15.0 + p * 6.0));
 }
 
 void main() {
-  // part 0 - basic shader setup
+  // ---------------------------------------------------------------------------
+  // 0) Pixelkoordinate -> UV
+  // ---------------------------------------------------------------------------
+  // gl_FragCoord.xy liegt in Pixeln vor. Durch Division erhalten wir
+  // normierte Koordinaten für die weitere Berechnung.
   vec2 uv = gl_FragCoord.xy / 800.0;
 
   // uncomment for final final demo
+  // Effektive Normalisierung für 800x600 Canvas (beide Achsen teilen durch 600,
+  // dadurch skaliert X etwas anders als Y).
   uv = gl_FragCoord.xy / 600.0;
 
   vec3 black = vec3(0.0);
   vec3 white = vec3(1.0);
   vec3 color = black;
 
-  // part 1 - set up a grid of cells
+  // ---------------------------------------------------------------------------
+  // 1) Gitteraufteilung
+  // ---------------------------------------------------------------------------
+  // *4.0 -> 4x4 Zellen über dem Bildschirmbereich.
+  // gridId : ganzzahliger Zellindex
+  // gridUv : lokale Position innerhalb einer Zelle [0,1]^2
   uv = uv * 4.0;
   vec2 gridId = floor(uv);
   vec2 gridUv = fract(uv);
   color = vec3(gridId, 0.0);
   color = vec3(gridUv, 0.0);
 
-  // part 2.1 - start by finding the coords of grid corners
+  // ---------------------------------------------------------------------------
+  // 2) Zell-Ecken bestimmen
+  // ---------------------------------------------------------------------------
   vec2 bl = gridId + vec2(0.0, 0.0);
   vec2 br = gridId + vec2(1.0, 0.0);
   vec2 tl = gridId + vec2(0.0, 1.0);
   vec2 tr = gridId + vec2(1.0, 1.0);
 
-  // part 2.2 - find random gradient for each grid corner
+  // Zu jeder Ecke einen (pseudo-)zufälligen Gradientenvektor erzeugen.
   vec2 gradBl = randomGradient(bl);
   vec2 gradBr = randomGradient(br);
   vec2 gradTl = randomGradient(tl);
   vec2 gradTr = randomGradient(tr);
 
-  // part 2.3 - visualize gradients (for demo purposes)
-  vec2 gridCell = gridId + gridUv;
-  float distG1 = sdfOrientedBox(gridCell, bl, bl + gradBl / 2.0, 0.02);
-  float distG2 = sdfOrientedBox(gridCell, br, br + gradBr / 2.0, 0.02);
-  float distG3 = sdfOrientedBox(gridCell, tl, tl + gradTl / 2.0, 0.02);
-  float distG4 = sdfOrientedBox(gridCell, tr, tr + gradTr / 2.0, 0.02);
-  if (distG1 < 0.0 || distG2 < 0.0 || distG3 < 0.0 || distG4 < 0.0) {
-    color = vec3(1.0);
-  }
-
-  // part 3.1 - visualize a single center pixel on each grid cell
-  float circleRadius = 0.025;
-  vec2 circleCenter = vec2(0.5, 0.5);
-  float distToCircle = sdfCircle(gridUv - circleCenter, circleRadius);
-  color = distToCircle > 0.0 ? color : white;
-
-  // part 3.2 - find distance from current pixel to each grid corner
+ 
+ 
+  // ---------------------------------------------------------------------------
+  // 3.2) Distanzvektoren von aktuellem Pixel zu den vier Ecken
+  // ---------------------------------------------------------------------------
+  // Diese Vektoren sind die Eingabe für die Dot-Products mit den Gradienten.
   vec2 distFromPixelToBl = gridUv - vec2(0.0, 0.0);
   vec2 distFromPixelToBr = gridUv - vec2(1.0, 0.0);
   vec2 distFromPixelToTl = gridUv - vec2(0.0, 1.0);
   vec2 distFromPixelToTr = gridUv - vec2(1.0, 1.0);
 
-  // part 4.1 - calculate the dot products of gradients + distances
+  // ---------------------------------------------------------------------------
+  // 4.1) Dot-Products (Gradient · Distanz)
+  // ---------------------------------------------------------------------------
+  // Jeder Eckwert entspricht dem Einfluss der Ecke auf das aktuelle Pixel.
   float dotBl = dot(gradBl, distFromPixelToBl);
   float dotBr = dot(gradBr, distFromPixelToBr);
   float dotTl = dot(gradTl, distFromPixelToTl);
   float dotTr = dot(gradTr, distFromPixelToTr);
 
-  // part 4.4 - smooth out gridUvs
-  // gridUv = smoothstep(0.0, 1.0, gridUv);
-  // gridUv = cubic(gridUv);
+  // 4.1b) Fade/Glättung der lokalen Zellkoordinate vor der Interpolation.
+  // Ohne diesen Schritt wären Übergänge zwischen Zellen deutlich härter.
   gridUv = quintic(gridUv);
 
-  // part 4.2 - perform linear interpolation between 4 dot products
+  // ---------------------------------------------------------------------------
+  // 4.2) Bilineare Interpolation
+  // ---------------------------------------------------------------------------
+  // Erst horizontal unten/oben, dann vertikal zwischen den Ergebnissen.
   float b = mix(dotBl, dotBr, gridUv.x);
   float t = mix(dotTl, dotTr, gridUv.x);
   float perlin = mix(b, t, gridUv.y);
 
-  // part 4.3 - display perlin noise
-  color = vec3(perlin + 0.2);
-  // color = distToCircle > 0.0 ? color : white;
-  // if (distG1 < 0.0 || distG2 < 0.0 || distG3 < 0.0 || distG4 < 0.0) {
-  //   color = vec3(1.0);
-  // }
+  // 4.3) Darstellung als Grauwert.
+  // perlin liegt typischerweise um den Bereich [-1, 1],
+  // wird hier ohne Remapping direkt ausgegeben.
+  color = vec3(perlin);
 
-  // part 4.5 - update randomGradient function with time
-
-  // part 5.1 - billow noise
-  // float billow = abs(perlin);
-  // color = vec3(billow);
-
-  // part 5.2 - ridged noise
-  // float ridgedNoise = 1.0 - abs(perlin);
-  // ridgedNoise = ridgedNoise * ridgedNoise;
-  // color = vec3(ridgedNoise);
 
   gl_FragColor = vec4(color, 1.0);
 }
@@ -164,6 +201,15 @@ void main() {
 </script>
 
     <script type="text/javascript">
+
+      // ---------------------------------------------------------------------
+      // JavaScript/WebGL Host-Code
+      // ---------------------------------------------------------------------
+      // Verantwortlich für:
+      // - Canvas + WebGL-Kontext erzeugen
+      // - Shader kompilieren/linken
+      // - Fullscreen-Quad als zwei Dreiecke zeichnen
+      // - Zeituniform pro Frame aktualisieren
 
 
         var shaderScript;
@@ -180,6 +226,7 @@ void main() {
         var someProgress;
         
         function init() {
+          // 1) Canvas und WebGL-Kontext initialisieren
             // Get A WebGL context
             canvas = document.getElementById("glcanvas");
             canvas.width = 800;
@@ -187,13 +234,14 @@ void main() {
             gl = canvas.getContext("webgl");
             gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
 
-            //compile and link shaders
+          // 2) Vertex-Shader laden und kompilieren
             shaderScript = document.getElementById("2d-vertex-shader");
             shaderSource = shaderScript.text;
             vertexShader = gl.createShader(gl.VERTEX_SHADER);
             gl.shaderSource(vertexShader, shaderSource);
             gl.compileShader(vertexShader);
 
+          // 3) Fragment-Shader laden und kompilieren
             shaderScript = document.getElementById("2d-fragment-shader");
             shaderSource = shaderScript.text;
             
@@ -201,6 +249,7 @@ void main() {
             gl.shaderSource(fragmentShader, shaderSource);
             gl.compileShader(fragmentShader);
 
+          // 4) Shader-Programm linken und aktivieren
             program = gl.createProgram();
             gl.attachShader(program, vertexShader);
             gl.attachShader(program, fragmentShader);
@@ -211,22 +260,27 @@ void main() {
 
 
 
-            // Create a buffer 
+            // 5) Vertex-Buffer für Fullscreen-Quad anlegen
             buffer = gl.createBuffer();
             
+            // Startwert für die animierte Zeituniform
             someProgress = 1.0;
+
+            // Start des Render-Loops
             render();
         }
 
         function render() {
 
-            //Gameloop
+            // requestAnimationFrame erzeugt einen kontinuierlichen Render-Loop.
             window.requestAnimationFrame(render, canvas);
 
+            // Framebuffer löschen (Hintergrundfarbe rot, wird vom Quad überdeckt)
             gl.clearColor(1.0, 0.0, 0.0, 1.0);
             gl.clear(gl.COLOR_BUFFER_BIT);
             gl.useProgram(program);
 
+            // Fullscreen-Quad als 2 Dreiecke in Clip Space [-1, 1]
             gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
             gl.bufferData(
             gl.ARRAY_BUFFER,
@@ -239,13 +293,17 @@ void main() {
                  1.0, 1.0]),
             gl.STATIC_DRAW);
 
+                // Attribut-Bindung: a_position liest jeweils vec2 aus dem Buffer
             positionLocation = gl.getAttribLocation(program, "a_position");
             gl.enableVertexAttribArray(positionLocation);
             gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+
+                // Uniform "t" pro Frame aktualisieren -> animiertes Noise
             var tLocation = gl.getUniformLocation(program, "t");
             gl.uniform1f(tLocation, someProgress);
             someProgress += 0.01;
             
+                // 6 Vertices = 2 Dreiecke = Fullscreen-Quad
             gl.drawArrays(gl.TRIANGLES, 0, 6);
         }
 </script>
