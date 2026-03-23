@@ -1,0 +1,14 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "CAD example (CAE)",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/code/cad/exaple.py",
+            "cwd": "${workspaceFolder}/code/cad",
+            "console": "integratedTerminal",
+            "python": "/opt/homebrew/Caskroom/miniforge/base/envs/CAE/bin/python"
+        }
+    ]
+}
