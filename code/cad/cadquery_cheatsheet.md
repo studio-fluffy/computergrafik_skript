@@ -18,6 +18,60 @@ result = (
 
 ---
 
+## Geometrie-Hierarchie: Vertices · Edges · Faces
+
+Ein 3D-Körper besteht aus drei Ebenen geometrischer Elemente:
+
+```
+Solid (Körper)
+ └── Faces   – Flächen, die den Körper begrenzen  (eben, zylindrisch, …)
+      └── Edges   – Kanten, die Flächen verbinden  (gerade Linie, Kreis, …)
+           └── Vertices – Punkte, an denen Kanten zusammentreffen
+```
+
+Mit `.vertices()`, `.edges()` und `.faces()` wechselst du in CadQuery
+in den jeweiligen Selektions-Kontext. Anschließende Operationen (fillet, hole, …)
+wirken dann genau auf die ausgewählten Elemente.
+
+```python
+result = cq.Workplane("XY").box(4, 4, 2)
+
+# Faces – alle Flächen abfragen
+result.faces()          # alle 6 Flächen des Quaders selektiert
+
+# Edges – alle Kanten abfragen
+result.edges()          # alle 12 Kanten des Quaders selektiert
+
+# Vertices – alle Punkte abfragen
+result.vertices()       # alle 8 Eckpunkte des Quaders selektiert
+```
+
+Ohne Selektor-Argument werden **alle** Elemente des jeweiligen Typs zurückgegeben.
+Mit einem Selektor-Argument wird gefiltert – das sind die Selektoren, die weiter
+unten erklärt werden:
+
+```python
+result.faces()          # alle 6 Flächen
+result.faces(">Z")      # nur die Deckfläche   (Selektor → siehe unten)
+result.edges("|Z")      # nur die 4 vertikalen Kanten
+result.vertices()       # alle 8 Eckpunkte
+```
+
+Typischer Ablauf – Fläche auswählen, Arbeitsebene darauf, dann zeichnen:
+
+```python
+(
+    cq.Workplane("XY")
+    .box(4, 4, 2)
+    .faces(">Z")         # Deckfläche als aktive Fläche setzen
+    .workplane()         # Arbeitsebene auf diese Fläche legen
+    .circle(0.8)         # Kreis auf der neuen Ebene zeichnen
+    .extrude(1)          # Kreis nach oben extrudieren → Zylinder entsteht
+)
+```
+
+---
+
 ## Arbeitsebenen (Workplane)
 
 | Ebene | Normale zeigt nach |
