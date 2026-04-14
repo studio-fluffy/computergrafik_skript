@@ -326,6 +326,15 @@
     \end{itemize}
     \end{block}
 \end{frame}
+\begin{frame}
+    \frametitle{Algorithmen und Datenstrukturen}
+    \framesubtitle{Bounding Volume Hierarchies}
+        \begin{figure}
+        \centering
+        \includegraphics[width=0.9\textwidth]{images/bvh.png}
+    \end{figure}
+\end{frame}
+
 
 
 \begin{frame}
@@ -344,6 +353,7 @@
     Je besser die H\"ullen angepasst sind und je ausgewogener der Baum ist,
     desto weniger primitive Tests sind bei Queries notwendig.
     \end{block}
+
 \end{frame}
 
 
@@ -364,6 +374,15 @@
         \item Effizient bei gro{\ss}en leeren Bereichen
     \end{itemize}
     \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Algorithmen und Datenstrukturen}
+    \framesubtitle{Octrees}
+        \begin{figure}
+        \centering
+        \includegraphics[width=0.9\textwidth]{images/octree.png}
+    \end{figure}
 \end{frame}
 
 
@@ -393,7 +412,6 @@
     Welche Kanten grenzen an eine Fl\"ache? Welche Fl\"achen treffen sich an
     einer Kante? Welche Vertices liegen in der 1-Ring-Nachbarschaft?
     \end{block}
-
     \begin{block}{Struktur}
     Eine Kante wird in zwei gerichtete Halb-Kanten zerlegt. Jede Halb-Kante
     speichert typischerweise Referenzen auf Startvertex, Gegenkante, n\"achste
@@ -401,7 +419,7 @@
     \end{block}
         \begin{figure}
         \centering
-        \includegraphics[width=0.\textwidth]{images/halfedge.png}
+        \includegraphics[width=0.4\textwidth]{images/halfedge.png}
     \end{figure}
 \end{frame}
 
@@ -442,9 +460,6 @@
     Objekten.
     \end{block}
 
-    \begin{align*}
-    \text{Anzahl Ebenen} \approx 1 + \lfloor \log_2(\max(w,h)) \rfloor
-    \end{align*}
 \end{frame}
 
 
@@ -461,6 +476,55 @@
     \begin{block}{Trade-off}
     Mipmaps ben\"otigen zus\"atzlichen Speicher, reduzieren daf\"ur Flimmern
     und verbessern die Bildqualit\"at deutlich.
+    \end{block}
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Algorithmen und Datenstrukturen}
+    \framesubtitle{Mipmaps: Intuition}
+    \small
+    \begin{block}{Warum reichen entfernten Objekten kleinere Texturen?}
+    Ist ein Objekt weit entfernt, dann werden viele Texel der Originaltextur
+    auf sehr wenige Bildschirmpixel projiziert. Ein einzelnes Pixel kann diese
+    feinen Details nicht mehr getrennt darstellen.
+    \end{block}
+
+    \begin{block}{Problem ohne Mipmaps}
+    Wenn trotzdem immer aus der vollen Aufl\"osung gesampelt wird, entstehen
+    Flimmern, Moir\"e-Muster und unruhige Oberfl\"achen. Die Textur enth\"alt
+    dann mehr Details, als auf dem Bildschirm sinnvoll dargestellt werden
+    k\"onnen.
+    \end{block}
+
+    \begin{block}{Idee mit Mipmaps}
+    Stattdessen verwendet man eine bereits verkleinerte Texturstufe, in der
+    die feinen Details passend zusammengefasst sind.
+    \end{block}
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Algorithmen und Datenstrukturen}
+    \framesubtitle{Mipmaps: Beispiel und Speicherbedarf}
+    \small
+    \begin{block}{Beispiel}
+    Eine Textur mit $1024 \times 1024$ Pixeln besitzt zus\"atzlich Stufen mit
+    $512 \times 512$, $256 \times 256$, $128 \times 128$ usw. Ein nahes Objekt
+    nutzt eine feine Stufe, ein entferntes Objekt eine grobere Stufe.
+    \end{block}
+
+    \begin{block}{Filterung}
+    Innerhalb einer Stufe werden benachbarte Texel interpoliert
+    (bilineare Filterung). Liegt die passende Aufl\"osung zwischen zwei
+    Stufen, wird auch zwischen diesen beiden Ebenen gemischt
+    (trilineare Filterung).
+    \end{block}
+
+    \begin{block}{Speicheraufwand}
+    Die gesamte Mipmap-Hierarchie ben\"otigt ungef\"ahr ein Drittel mehr
+    Speicher als nur die Originaltextur, liefert daf\"ur aber deutlich
+    stabilere und ruhigere Bilder.
     \end{block}
 \end{frame}
 
@@ -543,22 +607,6 @@
 \end{frame}
 
 
-\begin{frame}
-    \frametitle{Algorithmen und Datenstrukturen}
-    \framesubtitle{Uniform Grids}
-    \small
-    \begin{block}{Grundidee}
-    Der Raum wird in gleich gro{\ss}e Zellen zerlegt. Objekte werden in die
-    Zellen einsortiert, die sie schneiden. Nachbarschaftsanfragen m\"ussen dann
-    nur lokale Zellen betrachten.
-    \end{block}
-
-    \begin{block}{Warum das funktioniert}
-    Bei vielen Problemen sind nur lokale Wechselwirkungen relevant, etwa bei
-    Kollision, Partikelinteraktion oder Nachbarsuche. Dann ist es ineffizient,
-    alle Objekte global miteinander zu vergleichen.
-    \end{block}
-\end{frame}
 
 
 \begin{frame}
@@ -635,8 +683,10 @@
     \framesubtitle{Marching Cubes: Voxelgitter}
     \begin{figure}
         \centering
-        \includegraphics[width=0.7\textwidth]{images/Voxelgitter.png}
+        \includegraphics[width=0.4\textwidth]{images/Voxelgitter.png}
+        \includegraphics[width=0.4\textwidth]{images/marchingcubes_head.png}
     \end{figure}
+    
 \end{frame}
 
 
@@ -770,11 +820,6 @@
     Interaktive Visualisierung des Verfahrens:
     \href{https://threejs.org/examples/webgl_marchingcubes.html}{threejs marching cubes example}
     \end{block}
-
-    \begin{figure}
-        \centering
-        \includegraphics[width=0.5\textwidth]{images/marchingcubes_head.png}
-    \end{figure}
 \end{frame}
 
 
