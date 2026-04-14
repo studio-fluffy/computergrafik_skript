@@ -550,6 +550,15 @@
     \end{block}
 \end{frame}
 
+\begin{frame}
+    \frametitle{Algorithmen und Datenstrukturen}
+    \framesubtitle{LOD und Mesh Simplification}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.7\textwidth]{images/lod}
+    \end{figure}
+\end{frame}
+
 
 \begin{frame}
     \frametitle{Algorithmen und Datenstrukturen}
@@ -568,6 +577,28 @@
     LOD-\"Uberg\"ange.
     \end{block}
 \end{frame}
+
+\begin{frame}
+    \frametitle{Algorithmen und Datenstrukturen}
+    \framesubtitle{LOD und Mesh Simplification}
+    \small
+    \begin{block}{Mesh Simplification}
+    In der CityGML-Spezifikation wurden mehrere LOD-Stufen
+    herausgearbeitet, die vielen deutschen Stadtmodellen zugrunde liegen:
+
+    \begin{itemize}
+        \item LOD 0: Regionalmodell, 2,5-D-Geländemodell mit Luftbildtextur
+        \item LOD 1: Klötzchenmodell, Gebäudeblock (Grundfläche hochgezogen)
+        \item LOD 2: 3D-Modell der Außenhülle mit Dachstrukturen und einfachen Texturen
+        \item LOD 3: Architekturmodell, 3D-Modell der Außenhülle mit Textur
+        \item LOD 4: Innenraummodell, 3D-Modell des Gebäudes mit Etagen, Innenräumen etc. und Texturen
+    \end{itemize}
+
+    \end{block}
+
+
+\end{frame}
+
 
 
 \begin{frame}
@@ -771,22 +802,6 @@
 \end{frame}
 
 
-\begin{frame}
-    \frametitle{Algorithmen und Datenstrukturen}
-    \framesubtitle{Marching Cubes: Einfacher Fall}
-    \small
-    \begin{block}{Beispielkonfiguration}
-    Liegt genau eine W\"urfelecke auf einer Seite des Isolevels und die anderen
-    sieben auf der anderen Seite, dann werden genau die drei an dieser Ecke
-    anliegenden Kanten geschnitten.
-    \end{block}
-
-    \begin{block}{Folge}
-    Die drei interpolierten Schnittpunkte bilden genau ein Dreieck. Dieser Fall
-    zeigt anschaulich, wie aus einer lokalen Bitkonfiguration eine konkrete
-    Polygonisierung entsteht.
-    \end{block}
-\end{frame}
 
 
 \begin{frame}
