@@ -19,4 +19,3 @@ for x in range(0,resX+1):
             spheres.add(aSphere)
 sponge = sponge.cut(spheres)
 cq.exporters.export(sponge, "simpleSponge.step")
-
